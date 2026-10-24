@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" width="120" height="80">
+  <defs>
+    <linearGradient id="saffron" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9933"/>
+      <stop offset="100%" stop-color="#d85a00"/>
+    </linearGradient>
+    <radialGradient id="gold" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff3a8"/>
+      <stop offset="60%" stop-color="#f5b300"/>
+      <stop offset="100%" stop-color="#b87800"/>
+    </radialGradient>
+  </defs>
+  <!-- Swallowtail banner -->
+  <polygon points="0,0 120,0 95,40 120,80 0,80" fill="url(#saffron)" stroke="#8a2800" stroke-width="1.5"/>
+  <!-- Border trim -->
+  <polygon points="3,3 113,3 90,40 113,77 3,77" fill="none" stroke="#ffd700" stroke-width="1" opacity="0.6"/>
+  <!-- Solar wheel / royal chakra in gold -->
+  <circle cx="42" cy="40" r="18" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+  <circle cx="42" cy="40" r="6" fill="url(#gold)"/>
+  <!-- Sun rays -->
+  <g stroke="url(#gold)" stroke-width="2" stroke-linecap="round">
+    <line x1="42" y1="16" x2="42" y2="22"/>
+    <line x1="42" y1="58" x2="42" y2="64"/>
+    <line x1="18" y1="40" x2="24" y2="40"/>
+    <line x1="60" y1="40" x2="66" y2="40"/>
+    <line x1="25" y1="23" x2="29" y2="27"/>
+    <line x1="55" y1="53" x2="59" y2="57"/>
+    <line x1="25" y1="57" x2="29" y2="53"/>
+    <line x1="55" y1="27" x2="59" y2="23"/>
+  </g>
+</svg>

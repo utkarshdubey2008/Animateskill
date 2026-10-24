@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <!-- Background styling -->
+    <linearGradient id="landGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181c22"/>
+      <stop offset="50%" stop-color="#1c2128"/>
+      <stop offset="100%" stop-color="#15191e"/>
+    </linearGradient>
+    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e2238"/>
+      <stop offset="50%" stop-color="#132e4c"/>
+      <stop offset="100%" stop-color="#1a3d63"/>
+    </linearGradient>
+    <linearGradient id="desertGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e281e" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#221e17" stop-opacity="0.2"/>
+    </linearGradient>
+    <!-- Multi-tier blue river filter / styles -->
+    <style>
+      .river-bed { fill: none; stroke: #102a45; stroke-linecap: round; stroke-linejoin: round; }
+      .river-main { fill: none; stroke: #25689e; stroke-linecap: round; stroke-linejoin: round; }
+      .river-core { fill: none; stroke: #4ea2de; stroke-linecap: round; stroke-linejoin: round; }
+      .coast-line { fill: none; stroke: #3882be; stroke-width: 2.5; }
+      .coast-glow { fill: none; stroke: #1f4f78; stroke-width: 7; opacity: 0.5; }
+      .contour { fill: none; stroke: #2c3540; stroke-width: 1; stroke-dasharray: 4 4; }
+      .mountain-ridge { fill: none; stroke: #3a4450; stroke-width: 2.5; stroke-dasharray: 6 3; }
+      .place-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 13px; font-weight: bold; fill: #d5dde5; letter-spacing: 1px; }
+      .region-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 16px; font-weight: bold; fill: #728498; letter-spacing: 3px; }
+      .water-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 14px; font-style: italic; fill: #5c93c4; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <!-- 1. Base landmass fill -->
+  <rect width="1600" height="900" fill="url(#landGrad)"/>
+
+  <!-- 2. Ocean & Sea bodies (Arabian Sea, Gulf of Kutch, Gulf of Khambhat) -->
+  <path d="M 0,0 L 380,0 C 370,120 350,220 330,300 C 300,380 250,420 220,460 C 260,470 320,475 390,470 C 430,465 470,450 490,460 C 510,470 480,500 420,510 C 350,520 280,515 250,530 C 210,550 200,600 240,650 C 290,700 360,710 430,710 C 510,710 570,680 620,620 C 670,560 700,530 730,510 C 760,530 750,580 730,640 C 710,700 680,740 680,780 C 680,820 720,860 760,900 L 0,900 Z" fill="url(#seaGrad)"/>
+  
+  <!-- Coastal outline and water glow -->
+  <path d="M 380,0 C 370,120 350,220 330,300 C 300,380 250,420 220,460 C 260,470 320,475 390,470 C 430,465 470,450 490,460 C 510,470 480,500 420,510 C 350,520 280,515 250,530 C 210,550 200,600 240,650 C 290,700 360,710 430,710 C 510,710 570,680 620,620 C 670,560 700,530 730,510 C 760,530 750,580 730,640 C 710,700 680,740 680,780 C 680,820 720,860 760,900" class="coast-glow"/>
+  <path d="M 380,0 C 370,120 350,220 330,300 C 300,380 250,420 220,460 C 260,470 320,475 390,470 C 430,465 470,450 490,460 C 510,470 480,500 420,510 C 350,520 280,515 250,530 C 210,550 200,600 240,650 C 290,700 360,710 430,710 C 510,710 570,680 620,620 C 670,560 700,530 730,510 C 760,530 750,580 730,640 C 710,700 680,740 680,780 C 680,820 720,860 760,900" class="coast-line"/>
+
+  <!-- 3. Thar Desert & Great Rann shaded regions -->
+  <polygon points="280,180 550,150 680,240 580,380 340,360" fill="url(#desertGrad)" stroke="#4a3f2d" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <!-- Rann of Kutch marsh -->
+  <polygon points="320,440 560,420 580,480 380,490" fill="#1c2830" opacity="0.7" stroke="#385060" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- 4. Aravalli Range & Vindhya/Satpura mountain spines -->
+  <!-- Aravalli hills stretching NE to SW -->
+  <path d="M 1050,120 Q 920,240 820,380 Q 750,480 720,520" class="mountain-ridge"/>
+  <path d="M 1030,140 Q 900,260 800,400 Q 730,500 700,535" class="mountain-ridge" opacity="0.5"/>
+  <!-- Vindhya & Satpura ridges across Narmada & Tapi -->
+  <path d="M 850,560 Q 1100,540 1400,530" class="mountain-ridge"/>
+  <path d="M 820,660 Q 1080,650 1380,640" class="mountain-ridge"/>
+
+  <!-- 5. Rivers (Multi-tier blue strokes) -->
+  <!-- Indus River & eastern delta branch -->
+  <path d="M 180,0 Q 220,100 240,200 Q 270,320 220,460" class="river-bed" stroke-width="8"/>
+  <path d="M 180,0 Q 220,100 240,200 Q 270,320 220,460" class="river-main" stroke-width="4.5"/>
+  <path d="M 180,0 Q 220,100 240,200 Q 270,320 220,460" class="river-core" stroke-width="1.5"/>
+
+  <!-- Luni River (Rajasthan) -->
+  <path d="M 820,220 Q 680,260 560,340 Q 480,400 440,430" class="river-bed" stroke-width="6"/>
+  <path d="M 820,220 Q 680,260 560,340 Q 480,400 440,430" class="river-main" stroke-width="3"/>
+  <path d="M 820,220 Q 680,260 560,340 Q 480,400 440,430" class="river-core" stroke-width="1"/>
+
+  <!-- Sabarmati River -->
+  <path d="M 790,340 Q 740,400 720,480 Q 710,520 700,550" class="river-bed" stroke-width="6"/>
+  <path d="M 790,340 Q 740,400 720,480 Q 710,520 700,550" class="river-main" stroke-width="3"/>
+  <path d="M 790,340 Q 740,400 720,480 Q 710,520 700,550" class="river-core" stroke-width="1"/>
+
+  <!-- Mahi River -->
+  <path d="M 940,420 Q 840,460 760,510 Q 730,540 715,570" class="river-bed" stroke-width="6"/>
+  <path d="M 940,420 Q 840,460 760,510 Q 730,540 715,570" class="river-main" stroke-width="3"/>
+  <path d="M 940,420 Q 840,460 760,510 Q 730,540 715,570" class="river-core" stroke-width="1"/>
+
+  <!-- Narmada River (Bharuch estuary) -->
+  <path d="M 1450,580 Q 1150,590 900,595 Q 780,600 715,615" class="river-bed" stroke-width="9"/>
+  <path d="M 1450,580 Q 1150,590 900,595 Q 780,600 715,615" class="river-main" stroke-width="5.5"/>
+  <path d="M 1450,580 Q 1150,590 900,595 Q 780,600 715,615" class="river-core" stroke-width="2"/>
+
+  <!-- Tapi River & Purna River (Navsari / Surat theater) -->
+  <path d="M 1350,680 Q 1050,690 850,700 Q 760,710 700,725" class="river-bed" stroke-width="8"/>
+  <path d="M 1350,680 Q 1050,690 850,700 Q 760,710 700,725" class="river-main" stroke-width="4.5"/>
+  <path d="M 1350,680 Q 1050,690 850,700 Q 760,710 700,725" class="river-core" stroke-width="1.5"/>
+  <!-- Purna River at Navsari -->
+  <path d="M 950,750 Q 820,760 720,765" class="river-bed" stroke-width="6"/>
+  <path d="M 950,750 Q 820,760 720,765" class="river-main" stroke-width="3"/>
+  <path d="M 950,750 Q 820,760 720,765" class="river-core" stroke-width="1"/>
+
+  <!-- 6. Region & Sea Labels -->
+  <text x="80" y="680" class="water-text">ARABIAN SEA</text>
+  <text x="340" y="480" class="water-text" style="font-size: 11px;">GULF OF KUTCH</text>
+  <text x="540" y="650" class="water-text" style="font-size: 12px;">GULF OF KHAMBHAT</text>
+
+  <text x="420" y="250" class="region-text">THAR DESERT</text>
+  <text x="880" y="280" class="region-text">RAJASTHAN</text>
+  <text x="1080" y="460" class="region-text">MALWA</text>
+  <text x="420" y="620" class="region-text">SAURASHTRA</text>
+  <text x="780" y="840" class="region-text">DECCAN (CHALUKYA REALM)</text>
+
+  <!-- Waterway Names -->
+  <text x="1050" y="580" class="water-text" style="font-size: 11px;">Narmada River</text>
+  <text x="980" y="680" class="water-text" style="font-size: 11px;">Tapi River</text>
+  <text x="210" y="160" class="water-text" style="font-size: 11px;">Indus River</text>
+
+  <!-- 7. Key Fortress & City Markers (Base schematic pins) -->
+  <!-- Navsari -->
+  <circle cx="735" cy="760" r="5" fill="#d4af37" stroke="#181c22" stroke-width="1.5"/>
+  <text x="748" y="764" class="place-text" fill="#ffd700">NAVSARI</text>
+
+  <!-- Bharuch -->
+  <circle cx="730" cy="615" r="4" fill="#e0e6ed" stroke="#181c22" stroke-width="1.5"/>
+  <text x="744" y="619" class="place-text">Bharuch (Bhrigukachha)</text>
+
+  <!-- Ujjain -->
+  <circle cx="1160" cy="490" r="5" fill="#d4af37" stroke="#181c22" stroke-width="1.5"/>
+  <text x="1174" y="494" class="place-text">UJJAIN (Avanti)</text>
+
+  <!-- Chittor -->
+  <circle cx="960" cy="340" r="4" fill="#e0e6ed" stroke="#181c22" stroke-width="1.5"/>
+  <text x="974" y="344" class="place-text">Chittor (Mewar)</text>
+
+  <!-- Mansura (Sindh Base) -->
+  <circle cx="240" cy="320" r="4" fill="#e07a6e" stroke="#181c22" stroke-width="1.5"/>
+  <text x="254" y="324" class="place-text" fill="#f5a396">Mansura (Sindh)</text>
+
+  <!-- 8. Circular Compass / Scale Ruler (Top Right) -->
+  <g transform="translate(1480, 110)">
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="38" fill="none" stroke="#2d3748" stroke-width="1" stroke-dasharray="2 4"/>
+    <polygon points="0,-36 6,-8 0,-14 -6,-8" fill="#d4af37"/>
+    <polygon points="0,36 6,8 0,14 -6,8" fill="#718096"/>
+    <polygon points="-36,0 -8,6 -14,0 -8,-6" fill="#718096"/>
+    <polygon points="36,0 8,6 14,0 8,-6" fill="#718096"/>
+    <circle cx="0" cy="0" r="3" fill="#e2e8f0"/>
+    <text x="0" y="-42" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d4af37">N</text>
+  </g>
+</svg>

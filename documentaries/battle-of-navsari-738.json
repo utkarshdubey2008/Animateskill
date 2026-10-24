@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "id": "battle-of-navsari-738",
+  "title": "Battle of Rajasthan & Navsari (c. 738 CE)",
+  "date_label": "c. 738 CE",
+  "location_label": "Navsari & Rajasthan, India",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "duration_s": 90,
+  "disclaimer": "Schematic, not a survey. Tactical positions diagrammatic based on the Navsari Copperplate Grant (738-739 CE) and contemporary chronicles.",
+  "legend": [
+    {"swatch": "solid", "text": "Indian Confederacy / Imperial Realm"},
+    {"swatch": "hollow", "text": "Umayyad Caliphate (Tajika Army)"},
+    {"swatch": "dashed", "text": "Illustrative movement"}
+  ],
+  "palette": {
+    "chalukya": "#d4af37",
+    "pratihara": "#ff9933",
+    "umayyad": "#e07a6e",
+    "neutral": "#9aa6b2"
+  },
+  "map": {
+    "svg": "assets/maps/navsari-rajasthan-738.svg",
+    "attribution": "Original schematic drawn for this project. North is up. Uncolored tactical plate with multi-tier blue river channels. Do not replace with a scanned or traced published map."
+  },
+  "narration": {
+    "voice": "en-US-ChristopherNeural",
+    "audio_file": "assets/audio/navsari_738_narration.wav"
+  },
+  "markers": {
+    "pulakeshin": {
+      "role": "person",
+      "image": "assets/portraits/pulakeshin_circle.png",
+      "label": "Avanijanashraya Pulakeshin",
+      "detail": "Chalukya Viceroy of Navsari",
+      "side": "chalukya",
+      "confidence": "attested_area",
+      "x": 0.46,
+      "y": 0.77,
+      "anchor": "s",
+      "attach": "chalukya_army",
+      "offset": [-0.035, 0.035]
+    },
+    "nagabhata": {
+      "role": "person",
+      "image": "assets/portraits/nagabhata_circle.png",
+      "label": "Nagabhata I",
+      "detail": "Imperial Gurjara-Pratihara",
+      "side": "pratihara",
+      "confidence": "attested_area",
+      "x": 0.72,
+      "y": 0.44,
+      "anchor": "e",
+      "attach": "pratihara_army",
+      "offset": [0.035, -0.035]
+    },
+    "alhakam": {
+      "role": "person",
+      "image": "assets/portraits/alhakam_circle.png",
+      "label": "Al-Hakam ibn Awana",
+      "detail": "Umayyad Caliphate General",
+      "side": "umayyad",
+      "confidence": "attested_area",
+      "x": 0.22,
+      "y": 0.32,
+      "anchor": "w",
+      "attach": "umayyad_army",
+      "offset": [-0.035, -0.035]
+    },
+    "chalukya_army": {
+      "role": "army",
+      "label": "Chalukya Army of Lata",
+      "detail": "",
+      "side": "chalukya",
+      "confidence": "attested_area",
+      "symbol": ["infantry", "cavalry", "elephant"],
+      "x": 0.46,
+      "y": 0.81,
+      "anchor": "s"
+    },
+    "pratihara_army": {
+      "role": "army",
+      "label": "Gurjara-Pratihara Forces",
+      "detail": "",
+      "side": "pratihara",
+      "confidence": "attested_area",
+      "symbol": ["cavalry", "archer", "infantry"],
+      "x": 0.65,
+      "y": 0.40,
+      "anchor": "n"
+    },
+    "umayyad_army": {
+      "role": "army",
+      "label": "Umayyad Tajika Force",
+      "detail": "",
+      "side": "umayyad",
+      "confidence": "attested_area",
+      "symbol": ["cavalry", "infantry"],
+      "x": 0.22,
+      "y": 0.36,
+      "anchor": "n"
+    },
+    "navsari_fort": {
+      "label": "Navsari Stronghold",
+      "detail": "gateway to the Deccan",
+      "side": "neutral",
+      "confidence": "attested_area",
+      "x": 0.46,
+      "y": 0.84,
+      "anchor": "e"
+    },
+    "bharuch_crossing": {
+      "label": "Bharuch (Narmada Crossing)",
+      "detail": "estuary ford",
+      "side": "neutral",
+      "confidence": "attested_area",
+      "x": 0.455,
+      "y": 0.685,
+      "anchor": "w"
+    }
+  },
+  "scenes": [
+    {
+      "id": "invasion",
+      "title": "The Caliphate Strikes East",
+      "start_s": 0,
+      "end_s": 18,
+      "narration": "In the 730s CE, the Umayyad Caliphate launched a massive campaign to conquer India. Arab armies swept across Sindh, overrunning frontier kingdoms and advancing in a two-pronged offensive toward Rajasthan and Gujarat.",
+      "speech": "In the 730s CE, the Umayyad Caliphate launched a massive campaign to conquer India. Arab armies swept across Sindh, overrunning frontier kingdoms and advancing in a two-pronged offensive toward Rajasthan and Gujarat.",
+      "transition_in": "fade",
+      "transition_s": 0.6,
+      "camera": {
+        "start": {"cx": 0.45, "cy": 0.48, "zoom": 0.75},
+        "end": {"cx": 0.45, "cy": 0.48, "zoom": 0.75}
+      },
+      "show": ["alhakam", "umayyad_army", "navsari_fort"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "motions": {
+        "umayyad_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.15, "x": 0.22, "y": 0.36},
+            {"t": 0.80, "x": 0.35, "y": 0.42}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "rajasthan-stand",
+      "title": "Nagabhata I Holds the Desert Frontier",
+      "start_s": 18,
+      "end_s": 36,
+      "narration": "In Rajasthan, Nagabhata the First, founder of the Imperial Gurjara-Pratihara Dynasty, rallied a fierce resistance alongside the Guhilas of Mewar. Standing as an unyielding bulwark, Nagabhata shattered the northern Arab advance, driving the invaders back.",
+      "speech": "In Rajasthan, Nagabhata the First, founder of the Imperial Gurjara-Pratihara Dynasty, rallied a fierce resistance alongside the Guhilas of Mewar. Standing as an unyielding bulwark, Nagabhata shattered the northern Arab advance, driving the invaders back.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.58, "cy": 0.38, "zoom": 0.95},
+        "end": {"cx": 0.58, "cy": 0.38, "zoom": 0.95}
+      },
+      "show": ["nagabhata", "pratihara_army", "umayyad_army"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [
+        {
+          "type": "artillery",
+          "marker": "pratihara_army",
+          "t0": 0.35,
+          "t1": 0.65,
+          "intensity": 0.8
+        }
+      ],
+      "motions": {
+        "umayyad_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.05, "x": 0.48, "y": 0.36},
+            {"t": 0.40, "x": 0.56, "y": 0.38},
+            {"t": 0.80, "x": 0.38, "y": 0.35}
+          ]
+        },
+        "pratihara_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.65, "y": 0.40},
+            {"t": 0.70, "x": 0.58, "y": 0.38}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "southern-advance",
+      "title": "The Arab Surge on Navsari",
+      "start_s": 36,
+      "end_s": 54,
+      "narration": "Undeterred, the southern Caliphate army marched down the western coast to breach the Deccan. Sacking Saurashtra and crossing the Narmada past Bharuch, the veteran Tajika forces bore down upon the strategic fortress city of Navsari.",
+      "speech": "Undeterred, the southern Caliphate army marched down the western coast to breach the Deccan. Sacking Saurashtra and crossing the Narmada past Bharuch, the veteran Tajika forces bore down upon the strategic fortress city of Navsari.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.46, "cy": 0.72, "zoom": 0.95},
+        "end": {"cx": 0.46, "cy": 0.72, "zoom": 0.95}
+      },
+      "show": ["alhakam", "umayyad_army", "pulakeshin", "chalukya_army", "bharuch_crossing", "navsari_fort"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "motions": {
+        "umayyad_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.455, "y": 0.60},
+            {"t": 0.80, "x": 0.46, "y": 0.74}
+          ]
+        },
+        "chalukya_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.00, "x": 0.46, "y": 0.84},
+            {"t": 0.80, "x": 0.46, "y": 0.82}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "battle-of-navsari",
+      "title": "The Decisive Clash at Navsari",
+      "start_s": 54,
+      "end_s": 72,
+      "narration": "At Navsari, Chalukya commander Avanijanashraya Pulakeshin met the invaders in a titanic pitched battle. With armored war elephants, disciplined cavalry, and a ferocious counter-charge, Pulakeshin enveloped and annihilated the Caliphate force.",
+      "speech": "At Navsari, Chalukya commander Avanijanashraya Pulakeshin met the invaders in a titanic pitched battle. With armored war elephants, disciplined cavalry, and a ferocious counter-charge, Pulakeshin enveloped and annihilated the Caliphate force.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.46, "cy": 0.76, "zoom": 1.0},
+        "end": {"cx": 0.46, "cy": 0.76, "zoom": 1.0}
+      },
+      "show": ["alhakam", "pulakeshin", "chalukya_army", "umayyad_army", "navsari_fort"],
+      "overrides": {
+        "alhakam": {
+          "keys": [
+            {"t": 0.50, "mark": "killed", "detail": "army routed & crushed"}
+          ]
+        },
+        "umayyad_army": {
+          "keys": [
+            {"t": 0.0, "alpha": 1.0},
+            {"t": 0.48, "alpha": 1.0},
+            {"t": 0.75, "alpha": 0.0}
+          ]
+        }
+      },
+      "arrows": [],
+      "effects": [
+        {
+          "type": "artillery",
+          "marker": "navsari_fort",
+          "t0": 0.20,
+          "t1": 0.75,
+          "intensity": 1.0
+        }
+      ],
+      "motions": {
+        "chalukya_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.46, "y": 0.82},
+            {"t": 0.65, "x": 0.46, "y": 0.76}
+          ]
+        },
+        "umayyad_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.46, "y": 0.74},
+            {"t": 0.65, "x": 0.46, "y": 0.76}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "triumph",
+      "title": "The Bulwark of India",
+      "start_s": 72,
+      "end_s": 90,
+      "narration": "The victory at Navsari was total. Hailed as the Repeller of the Tajikas, Pulakeshin saved the Deccan, while the Gurjara-Pratiharas secured the north. Together, these Indian monarchs crushed the invasion and protected India for three centuries.",
+      "speech": "The victory at Navsari was total. Hailed as the Repeller of the Tajikas, Pulakeshin saved the Deccan, while the Gurjara-Pratiharas secured the north. Together, these Indian monarchs crushed the invasion and protected India for three centuries.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.52, "cy": 0.56, "zoom": 0.80},
+        "end": {"cx": 0.52, "cy": 0.56, "zoom": 0.80}
+      },
+      "show": ["pulakeshin", "nagabhata", "chalukya_army", "pratihara_army", "navsari_fort"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "motions": {
+        "chalukya_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.46, "y": 0.76},
+            {"t": 1.0, "x": 0.46, "y": 0.76}
+          ]
+        },
+        "pratihara_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.58, "y": 0.38},
+            {"t": 1.0, "x": 0.58, "y": 0.38}
+          ]
+        }
+      },
+      "overlays": [
+        {
+          "type": "card",
+          "t0": 0.15,
+          "t1": 0.98,
+          "accent": 0,
+          "lines": [
+            "BATTLE OF NAVSARI & RAJASTHAN",
+            "c. 738 CE",
+            "Avanijanashraya Pulakeshin & Nagabhata I",
+            "Tajika Caliphate Army Annihilated — India Secured for 300 Years"
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "navsari-grant",
+      "text": "The Navsari Copperplate Grant (738-739 CE) records that the Tajika (Arab) army, having destroyed the kingdoms of Saindhava, Kachchella, Saurashtra, Chavotkata, and Maurya, attempted to invade the Deccan. Avanijanashraya Pulakeshin, Chalukya viceroy of Gujarat, defeated and destroyed them at Navsari.",
+      "refs": [
+        "Mirashi, V. V., Corpus Inscriptionum Indicarum, Vol. IV (Inscriptions of the Kalachuri-Chedi Era)",
+        "Bhandarkar, D. R., Indian Antiquary, Vol. XVII"
+      ]
+    },
+    {
+      "id": "gwalior-prasasti",
+      "text": "The Gwalior Inscription of Mihira Bhoja states that Nagabhata I defeated a large army of the powerful Mlechchha (Arab) ruler, serving as a protective bulwark (Narayan) against the foreign invader.",
+      "refs": [
+        "Epigraphia Indica, Vol. XVIII (Gwalior Inscription of Bhoja I)",
+        "Majumdar, R. C., The Age of Imperial Kanauj (The History and Culture of the Indian People)"
+      ]
+    }
+  ]
+}
