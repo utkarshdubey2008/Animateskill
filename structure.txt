@@ -1,0 +1,27 @@
+utkarshdubey2008/Animateskill/
+│
+├── README.md
+├── AGENTS.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── plugins.json
+├── structure.txt
+├── requirements.txt
+│
+├── skills/
+│   ├── historical-animation/SKILL.md
+│   ├── battle-map/SKILL.md + assets/circular-ruler.svg
+│   ├── army-symbols/SKILL.md + assets/*.svg
+│   ├── commander-portraits/SKILL.md + scripts/circular_crop.py
+│   └── silent-subtitles/SKILL.md
+│
+├── docs/
+│   ├── house-rules.md
+│   ├── placement.md
+│   ├── scene-contract.md
+│   └── renderer.md
+│
+├── hde/                 renderer. Silence is the default.
+├── documentaries/       one JSON film per war
+├── assets/maps/         plates
+└── tests/

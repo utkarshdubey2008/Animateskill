@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <title>Palashi, 23 June 1757 — schematic</title>
+  <desc>
+    Original schematic drawn for the Historical Documentary Engine.
+    North is up. The Bhagirathi is a diagram on the west side of the field;
+    the river has changed course since 23 June 1757.
+    The mango grove is Clive's attested defensive area.
+    The Nawab's camp is the attested area north of the grove, toward Murshidabad.
+    The ditch and the hunting lodge are traditional landmarks, placed approximately.
+    This plate contains no troop-movement arrows. Movement is supplied by the scene
+    file and is drawn there as illustrative.
+    Do not replace this file with a scanned or traced published map.
+  </desc>
+  <rect width="1600" height="900" fill="#101410"/>
+  <rect x="36" y="36" width="1528" height="828" fill="#2c342a"/>
+  <path d="M36 36 H250 C300 120 180 180 230 270 C290 370 160 430 210 530 C270 640 150 700 200 864 H36 Z" fill="#0e2834"/>
+  <path d="M36 36 H170 C220 130 120 200 160 290 C210 390 100 450 140 560 C190 660 110 730 140 864 H36 Z" fill="#1a4a5e"/>
+  <path d="M250 36 C300 120 180 180 230 270 C290 370 160 430 210 530 C270 640 150 700 200 864" fill="none" stroke="#c6b48a" stroke-width="7" opacity="0.55"/>
+  <path d="M190 36 C230 140 140 210 180 320 C230 430 130 500 170 620 C210 720 150 790 170 864" fill="none" stroke="#7eb4c8" stroke-width="3" opacity="0.45"/>
+  <g fill="none" stroke="#3d483a" stroke-width="2" opacity="0.9">
+    <path d="M420 160 C700 120 1040 190 1460 140"/>
+    <path d="M380 340 C760 290 1120 380 1500 320"/>
+    <path d="M360 560 C780 500 1180 600 1520 540"/>
+    <path d="M400 760 C860 700 1200 790 1480 740"/>
+  </g>
+  <path d="M820 864 C790 760 760 720 800 690" fill="none" stroke="#7a7162" stroke-width="4"/>
+  <path d="M620 600 C760 575 900 585 1040 568" fill="none" stroke="#a08455" stroke-width="6"/>
+  <path d="M620 608 C760 584 900 594 1040 576" fill="none" stroke="#6d5a38" stroke-width="2"/>
+  <ellipse cx="800" cy="660" rx="168" ry="78" fill="#243528"/>
+  <g fill="#1e4a30" stroke="#173824" stroke-width="2">
+    <circle cx="700" cy="640" r="16"/>
+    <circle cx="742" cy="678" r="20"/>
+    <circle cx="790" cy="628" r="18"/>
+    <circle cx="836" cy="682" r="22"/>
+    <circle cx="888" cy="640" r="16"/>
+    <circle cx="760" cy="612" r="12"/>
+    <circle cx="910" cy="690" r="14"/>
+    <circle cx="680" cy="690" r="13"/>
+    <circle cx="850" cy="612" r="11"/>
+  </g>
+  <g fill="#3f7a4e">
+    <circle cx="724" cy="652" r="6"/>
+    <circle cx="806" cy="666" r="7"/>
+    <circle cx="868" cy="656" r="5"/>
+  </g>
+  <g>
+    <polygon points="748,628 770,604 792,628" fill="#8d7a5c" stroke="#e6dcc8" stroke-width="2"/>
+    <rect x="752" y="628" width="36" height="20" fill="#6e624e" stroke="#e6dcc8" stroke-width="2"/>
+  </g>
+  <g fill="#5c4638" stroke="#e4d5c0" stroke-width="2">
+    <polygon points="960,360 990,312 1020,360"/>
+    <polygon points="1024,352 1056,300 1088,352"/>
+    <polygon points="1092,360 1122,314 1152,360"/>
+    <polygon points="990,392 1018,350 1046,392"/>
+    <polygon points="1060,398 1092,348 1124,398"/>
+  </g>
+  <g fill="#f0eadc" stroke="#121614" stroke-width="4" paint-order="stroke fill" font-family="Liberation Sans, DejaVu Sans, sans-serif">
+    <text x="78" y="390" font-size="24">BHAGIRATHI</text>
+    <text x="78" y="418" font-size="16" fill="#c5d5de">schematic course</text>
+    <text x="78" y="446" font-size="16" fill="#c9c0ae">not to scale</text>
+    <text x="860" y="118" font-size="26" text-anchor="middle">toward Murshidabad</text>
+    <text x="640" y="188" font-size="30" text-anchor="middle">PALASHI</text>
+    <text x="390" y="640" font-size="20">toward Calcutta</text>
+    <text x="1180" y="680" font-size="22">mango grove</text>
+    <text x="470" y="545" font-size="16" fill="#e6d7b8">ditch (approx.)</text>
+    <text x="600" y="615" font-size="16" fill="#e6d7b8">lodge (approx.)</text>
+    <text x="900" y="268" font-size="22" text-anchor="middle">Nawab's camp</text>
+  </g>
+  <g transform="translate(1468,120)" fill="none" stroke="#e6dcc8" stroke-width="2">
+    <circle r="34" fill="#1a201c"/>
+    <polygon points="0,-22 6,8 0,2 -6,8" fill="#e6dcc8" stroke="none"/>
+    <text y="30" text-anchor="middle" fill="#e6dcc8" stroke="none" font-family="Liberation Sans" font-size="16">N</text>
+  </g>
+  <rect x="36" y="36" width="1528" height="828" fill="none" stroke="#b7ad96" stroke-width="2" opacity="0.45"/>
+</svg>

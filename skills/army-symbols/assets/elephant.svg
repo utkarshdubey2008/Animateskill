@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>War elephant</title>
+  <g fill="currentColor" stroke="#121614" stroke-width="2" paint-order="stroke fill">
+    <circle cx="30" cy="14" r="4"/>
+    <ellipse cx="32" cy="34" rx="16" ry="12"/>
+    <path d="M46 30 C54 30 56 40 50 48" fill="none" stroke="currentColor" stroke-width="4"/>
+    <rect x="18" y="42" width="4" height="12"/>
+    <rect x="28" y="42" width="4" height="12"/>
+    <rect x="38" y="42" width="4" height="12"/>
+  </g>
+</svg>

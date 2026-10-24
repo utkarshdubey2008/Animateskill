@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Chariot</title>
+  <g fill="currentColor" stroke="#121614" stroke-width="2" paint-order="stroke fill">
+    <rect x="16" y="22" width="28" height="14" rx="2"/>
+    <circle cx="24" cy="46" r="7" fill="none" stroke="currentColor"/>
+    <circle cx="42" cy="46" r="7" fill="none" stroke="currentColor"/>
+    <path d="M44 28 H56" fill="none" stroke="currentColor" stroke-width="3"/>
+  </g>
+</svg>
