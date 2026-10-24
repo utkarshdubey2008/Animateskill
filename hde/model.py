@@ -706,8 +706,10 @@ def _markers(value: dict, palette: dict[str, tuple[int, int, int]], where: str) 
 
 
 def _legend(value: object, where: str) -> list[LegendItem]:
-    if not isinstance(value, list) or not value:
-        raise ValueError(f"{where} must be a non-empty list")
+    if value is None or (isinstance(value, list) and len(value) == 0):
+        return []
+    if not isinstance(value, list):
+        raise ValueError(f"{where} must be a list")
     items: list[LegendItem] = []
     for index, item in enumerate(value):
         spot = f"{where}[{index}]"

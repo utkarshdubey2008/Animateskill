@@ -98,12 +98,12 @@ description: >
 
 ## 6. Multi-Box Formations & Vanguard Screening
 
-- **Monarch / General Rear Command Position**: The monarch or supreme commander is rendered as a circular portrait figure (`shape: "circle"`, `is_commander: true`) positioned in the rear tactical reserve or headquarters line.
-- **3–5 Formation Boxes Ahead**: Deploy 3 to 5 distinct rectangular formation boxes ahead of the monarch's position to represent tactical echelons:
-  - **Vanguard**: Elephant screen or shock vanguard (`kind: "elephant"` or `"cavalry"`).
-  - **Center**: Main infantry line (`kind: "infantry"`).
-  - **Flanks**: Left and right cavalry wings or archer contingents (`kind: "cavalry"`, `"archer"`).
-- **Advancing Formation Waves**: Animate movement using scene `motions` interpolating positions across keyframes, moving formation boxes forward into combat contact.
+- **Monarch / General Rear Command Position**: The monarch or supreme commander is rendered as a circular portrait figure (`role: "person"`, circular portrait) positioned in the rear tactical reserve or headquarters line. Both opposing commanders must remain fully within the active screen viewport across all scenes.
+- **3 Rectangular Plain Boxes Ahead**: Deploy exactly 3 rectangular plain formation boxes ahead of the monarch's position to represent tactical echelons (e.g. Left Flank, Center Shock Line, Right Flank).
+  - **Sizing**: Compact and proportional (`~46x24` px at 720p), never oversized.
+  - **Plain Styling**: No flags, banners, unit icons, or text labels on the army boxes.
+  - **Bold / Gradient Color**: Rich vertical linear gradient with luminous edge bevel and crisp saturated border matching the faction palette.
+- **Advancing Formation Waves**: Animate movement using scene `motions` interpolating positions across keyframes, moving formation boxes forward into combat contact while both leaders stay in-frame.
 
 ---
 
@@ -119,33 +119,40 @@ description: >
 
 ---
 
-## 8. Left-Hand Tactical Forces & Casualty HUD
+## 8. Horizontal Tactical Forces & Casualty HUD
 
-- **Scoreboard Box Layout**: Positioned on the left side of the screen (`x: 24`, `y: 92`, `width: 250`), well above subtitles and tactical legends.
+- **Scoreboard Box Layout**: Positioned on the left side of the screen (`x: 24`, `y: 82`), horizontal, sleek, and compact (`width: ~500px`, `height: ~54px`), leaving the central battlefield open.
+- **Side-by-Side Party Columns**: Rather than stacking parties vertically, place combatant cards side-by-side separated by a vertical divider line.
 - **Top-Level Documentary Schema**:
   ```json
   "parties": [
     {
-      "name": "Chalukya-Lata Kingdom",
+      "name": "Chalukya-Lata (Pulakeshin)",
       "side": "chalukya",
-      "flag": "chalukya",
       "army_size": "~35,000",
-      "killed": "~6,000 casualties"
+      "killed": "~6,000"
     },
     {
-      "name": "Umayyad Caliphate",
+      "name": "Umayyad Caliphate (Al-Hakam)",
       "side": "umayyad",
-      "flag": "umayyad",
       "army_size": "~45,000",
-      "killed": "~25,000+ killed / routed"
+      "killed": "~25,000+ (ANNIHILATED)"
     }
   ]
   ```
 - **HUD Components**:
-  - Dark translucent HUD card background (`rgba(10, 16, 26, 0.88)` with subtle cyan border).
+  - Translucent glass HUD card (`rgba(8, 12, 16, 0.85)` with subtle steel blue border).
+  - Gold accent tag with `"FORCES & CASUALTIES"`.
   - Mini flag thumbnails mounted beside party names.
-  - Total initial army force size.
-  - Accurate casualty count and status (victorious vs annihilated).
+  - Force size and casualty metrics on each horizontal column.
+
+---
+
+## 9. Silent Video & Custom Audio Decoupling
+
+- When custom audio is added separately by the user:
+  - Set `"audio_file": null` in documentary narration config.
+  - The render pipeline creates a pristine silent AAC audio stream conforming to strict MP4 container validation without placeholder badges.
 
 ---
 

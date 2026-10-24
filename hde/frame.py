@@ -345,11 +345,11 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
     color = ctx.doc.palette[marker.side]
 
     if marker.role == "army":
-        box_w = max(44, int(round(64 * scale)))
-        box_h = max(36, int(round(48 * scale)))
+        box_w = max(34, int(round(46 * scale)))
+        box_h = max(18, int(round(24 * scale)))
         half_w = box_w // 2
         half_h = box_h // 2
-        rect = [sx - half_w, sy - half_h, sx + half_w, sy + half_h]
+        rect = [int(round(sx - half_w)), int(round(sy - half_h)), int(round(sx + half_w)), int(round(sy + half_h))]
         is_destroyed = state["mark"] in ("destroyed", "shattered", "vaporized")
 
         if is_destroyed:
@@ -394,52 +394,20 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
                 px = sx + int(dist * math.cos(rad))
                 py = sy + int(dist * math.sin(rad))
                 draw.ellipse([px - 2, py - 2, px + 2, py + 2], fill=(255, 180, 50, int(alpha * 0.85)))
-        elif marker.confidence == "attested_area":
-            draw.rectangle(
-                rect,
-                fill=(*color, int(alpha * 0.85)),
-                outline=(20, 16, 12, alpha),
-                width=max(1, int(2 * scale)),
-            )
         else:
-            draw.rectangle(
-                rect,
-                fill=(*INK, int(200 * alpha / 255)),
-                outline=(*color, alpha),
-                width=max(2, int(3 * scale)),
-            )
-        # Unit symbols inside (only if intact)
-        if marker.symbol and not is_destroyed:
-            sym_count = len(marker.symbol)
-            icon_size = max(14, int(round(18 * scale)))
-            gap = max(2, int(round(3 * scale)))
-            total_icons_w = sym_count * icon_size + (sym_count - 1) * gap
-            start_x = sx - total_icons_w // 2
-            icon_y = sy - icon_size // 2
-            hex_color = f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
-            for s_idx, sym_name in enumerate(marker.symbol):
-                icon_img = _load_unit_icon(sym_name, hex_color, icon_size)
-                draw._image.paste(icon_img, (int(start_x + s_idx * (icon_size + gap)), int(icon_y)), icon_img)
-        # Historical Flag or Banner
-        flag_w = max(24, int(round(34 * scale)))
-        flag_h = max(16, int(round(22 * scale)))
-        flag_img = _load_flag_image(marker.side, flag_w, flag_h)
-        if flag_img is not None:
-            # Place flag attached neatly to the top edge of the box
-            flag_x = int(sx - half_w if marker.anchor == "w" else sx + half_w - flag_w)
-            flag_y = int(sy - half_h - flag_h - max(2, int(3 * scale)))
-            # Flagpole
-            pole_x = flag_x if marker.anchor == "w" else flag_x + flag_w - 1
-            draw.line([(pole_x, flag_y), (pole_x, sy - half_h)], fill=(225, 230, 235, alpha), width=max(1, int(2 * scale)))
-            draw._image.paste(flag_img, (flag_x, flag_y), flag_img)
-        else:
-            banner_size = max(14, int(round(18 * scale)))
-            hex_color = f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
-            banner_img = _load_unit_icon("banner", hex_color, banner_size)
-            if marker.anchor == "w" or "seleucid" in marker.side.lower() or "seleucid" in marker.id:
-                draw._image.paste(banner_img, (int(sx + half_w - banner_size // 2), int(sy - half_h - banner_size // 2)), banner_img)
-            else:
-                draw._image.paste(banner_img, (int(sx - half_w - banner_size // 2), int(sy - half_h - banner_size // 2)), banner_img)
+            # Bold gradient fill for plain rectangular army boxes
+            c_top = (min(255, int(color[0] * 1.35 + 25)), min(255, int(color[1] * 1.35 + 25)), min(255, int(color[2] * 1.35 + 25)))
+            c_bot = (int(color[0] * 0.70), int(color[1] * 0.70), int(color[2] * 0.70))
+            for ry in range(rect[1], rect[3]):
+                f = (ry - rect[1]) / max(1, rect[3] - rect[1])
+                cr = int(c_top[0] * (1.0 - f) + c_bot[0] * f)
+                cg = int(c_top[1] * (1.0 - f) + c_bot[1] * f)
+                cb = int(c_top[2] * (1.0 - f) + c_bot[2] * f)
+                draw.line([(rect[0], ry), (rect[2], ry)], fill=(cr, cg, cb, int(alpha * 0.95)))
+            border_col = (min(255, int(c_top[0] + 35)), min(255, int(c_top[1] + 35)), min(255, int(c_top[2] + 35)), alpha)
+            draw.rectangle(rect, outline=border_col, width=max(1, int(1.5 * scale)))
+            draw.line([(rect[0] + 1, rect[1] + 1), (rect[2] - 1, rect[1] + 1)], fill=(255, 255, 255, int(alpha * 0.40)))
+
         radius = max(half_w, half_h)
 
     elif marker.role == "person":
@@ -484,21 +452,22 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
         draw.line([(sx - span, sy - span), (sx + span, sy + span)], fill=kill, width=width)
         draw.line([(sx - span, sy + span), (sx + span, sy - span)], fill=kill, width=width)
 
-    title_font = _font(ctx.fonts.sans_bold, _px(15, ctx.height))
-    detail_font = _font(ctx.fonts.sans, _px(13, ctx.height))
-    _place_marker_label(
-        draw,
-        ctx,
-        sx,
-        sy,
-        radius,
-        marker.anchor,
-        state["label"],
-        state["detail"],
-        title_font,
-        detail_font,
-        alpha,
-    )
+    if marker.role != "army":
+        title_font = _font(ctx.fonts.sans_bold, _px(15, ctx.height))
+        detail_font = _font(ctx.fonts.sans, _px(13, ctx.height))
+        _place_marker_label(
+            draw,
+            ctx,
+            sx,
+            sy,
+            radius,
+            marker.anchor,
+            state["label"],
+            state["detail"],
+            title_font,
+            detail_font,
+            alpha,
+        )
 
 
 def _marker_state(marker: MarkerDef, keys: list[MarkerKey], t: float) -> dict:
@@ -659,38 +628,43 @@ def _draw_parties_hud(frame: Image.Image, ctx: FrameContext, x: int, y: int) -> 
     if not ctx.doc.parties:
         return 0
     scale = ctx.height / 720
-    header_font = _font(ctx.fonts.sans_bold, max(9, int(11 * scale)))
-    name_font = _font(ctx.fonts.sans_bold, max(11, int(13 * scale)))
-    stats_font = _font(ctx.fonts.sans, max(10, int(12 * scale)))
+    header_font = _font(ctx.fonts.sans_bold, max(8, int(10 * scale)))
+    name_font = _font(ctx.fonts.sans_bold, max(10, int(12 * scale)))
+    stats_font = _font(ctx.fonts.sans, max(9, int(11 * scale)))
 
-    pad = 8
-    flag_w = max(22, int(26 * scale))
-    flag_h = max(14, int(17 * scale))
+    pad = max(6, int(8 * scale))
+    flag_w = max(20, int(24 * scale))
+    flag_h = max(13, int(15 * scale))
 
-    box_w = max(250, int(310 * scale))
-    header_h = _text_height(header_font) + 4
-    row_h = max(flag_h, _text_height(name_font) + _text_height(stats_font) + 4) + 6
-    box_h = pad * 2 + header_h + len(ctx.doc.parties) * row_h
+    n_parties = len(ctx.doc.parties)
+    col_w = max(205, int(240 * scale))
+    col_gap = max(10, int(14 * scale))
 
-    panel = Image.new("RGBA", (box_w, box_h), (10, 14, 18, 220))
+    box_w = pad * 2 + n_parties * col_w + (n_parties - 1) * col_gap
+    header_h = _text_height(header_font) + 2
+    row_h = max(flag_h, _text_height(name_font) + _text_height(stats_font) + 2)
+    box_h = pad * 2 + header_h + row_h + 3
+
+    panel = Image.new("RGBA", (box_w, box_h), (8, 12, 16, 215))
     pdraw = ImageDraw.Draw(panel)
-    pdraw.rounded_rectangle([0, 0, box_w - 1, box_h - 1], radius=6, outline=(60, 72, 88, 200), width=1)
-    pdraw.rectangle([pad, pad - 2, pad + 24, pad], fill=(212, 175, 55, 230))
-
+    pdraw.rounded_rectangle([0, 0, box_w - 1, box_h - 1], radius=5, outline=(55, 70, 90, 190), width=1)
+    pdraw.rectangle([pad, pad - 1, pad + 20, pad + 1], fill=(212, 175, 55, 230))
     pdraw.text((pad, pad), "FORCES & CASUALTIES", font=header_font, fill=(212, 175, 55, 240))
 
-    curr_y = pad + header_h + 2
+    curr_x = pad
+    content_y = pad + header_h + 3
     for p_idx, party in enumerate(ctx.doc.parties):
         if p_idx > 0:
-            pdraw.line([(pad, curr_y - 3), (box_w - pad, curr_y - 3)], fill=(45, 55, 68, 180), width=1)
+            sep_x = curr_x - col_gap // 2
+            pdraw.line([(sep_x, content_y), (sep_x, box_h - pad)], fill=(45, 55, 68, 180), width=1)
         flag_img = _load_flag_image(party.side, flag_w, flag_h)
         if flag_img is not None:
-            panel.paste(flag_img, (pad, curr_y + 1), flag_img)
-        text_x = pad + flag_w + 8
-        pdraw.text((text_x, curr_y - 1), party.name, font=name_font, fill=PAPER)
+            panel.paste(flag_img, (curr_x, content_y + 1), flag_img)
+        text_x = curr_x + flag_w + 6
+        pdraw.text((text_x, content_y - 1), party.name, font=name_font, fill=PAPER)
         stats_line = f"Force: {party.army_size}  |  Losses: {party.killed}" if party.killed else f"Force: {party.army_size}"
-        pdraw.text((text_x, curr_y + _text_height(name_font) + 2), stats_line, font=stats_font, fill=(200, 210, 225, 230))
-        curr_y += row_h
+        pdraw.text((text_x, content_y + _text_height(name_font) + 1), stats_line, font=stats_font, fill=(195, 208, 222, 230))
+        curr_x += col_w + col_gap
 
     frame.paste(panel, (x, y), panel)
     return box_h

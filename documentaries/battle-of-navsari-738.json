@@ -23,11 +23,7 @@
       "killed": "~25,000+ (ANNIHILATED)"
     }
   ],
-  "legend": [
-    {"swatch": "solid", "text": "Indian Defense Array (Chalukya-Lata)"},
-    {"swatch": "hollow", "text": "Umayyad Caliphate (Tajika Army)"},
-    {"swatch": "dashed", "text": "Illustrative movement"}
-  ],
+  "legend": [],
   "palette": {
     "chalukya": "#d4af37",
     "pratihara": "#ff9933",
@@ -40,7 +36,7 @@
   },
   "narration": {
     "voice": "en-US-ChristopherNeural",
-    "audio_file": "assets/audio/navsari_tactical_738.wav"
+    "audio_file": null
   },
   "markers": {
     "pulakeshin": {
@@ -51,7 +47,7 @@
       "side": "chalukya",
       "confidence": "attested_area",
       "x": 0.50,
-      "y": 0.76,
+      "y": 0.70,
       "anchor": "s"
     },
     "nagabhata": {
@@ -61,8 +57,8 @@
       "detail": "Imperial Pratihara Allied Victor",
       "side": "pratihara",
       "confidence": "attested_area",
-      "x": 0.65,
-      "y": 0.74,
+      "x": 0.67,
+      "y": 0.70,
       "anchor": "e"
     },
     "alhakam": {
@@ -73,95 +69,61 @@
       "side": "umayyad",
       "confidence": "attested_area",
       "x": 0.50,
-      "y": 0.12,
+      "y": 0.24,
       "anchor": "n"
     },
-    "pulakeshin_vanguard_elephants": {
+    "pulakeshin_left": {
       "role": "army",
-      "label": "Vanguard War Elephants",
-      "detail": "~10,000 elephant corps",
+      "label": "Left Flank Division",
       "side": "chalukya",
       "confidence": "attested_area",
-      "symbol": ["elephant"],
+      "x": 0.36,
+      "y": 0.60,
+      "anchor": "w"
+    },
+    "pulakeshin_center": {
+      "role": "army",
+      "label": "Vanguard Shock Corps",
+      "side": "chalukya",
+      "confidence": "attested_area",
       "x": 0.50,
-      "y": 0.64,
+      "y": 0.58,
       "anchor": "w"
     },
-    "pulakeshin_infantry_center": {
+    "pulakeshin_right": {
       "role": "army",
-      "label": "Center Armored Ranks",
-      "detail": "~15,000 infantry",
+      "label": "Right Flank Division",
       "side": "chalukya",
       "confidence": "attested_area",
-      "symbol": ["infantry"],
-      "x": 0.50,
-      "y": 0.70,
-      "anchor": "w"
-    },
-    "pulakeshin_cavalry_left": {
-      "role": "army",
-      "label": "Left Flank Cavalry",
-      "detail": "~5,000 cavalry",
-      "side": "chalukya",
-      "confidence": "attested_area",
-      "symbol": ["cavalry"],
-      "x": 0.38,
-      "y": 0.67,
-      "anchor": "w"
-    },
-    "pulakeshin_cavalry_right": {
-      "role": "army",
-      "label": "Right Flank Cavalry",
-      "detail": "~5,000 cavalry",
-      "side": "chalukya",
-      "confidence": "attested_area",
-      "symbol": ["cavalry"],
-      "x": 0.62,
-      "y": 0.67,
+      "x": 0.64,
+      "y": 0.60,
       "anchor": "e"
     },
-    "umayyad_vanguard": {
+    "umayyad_left": {
       "role": "army",
-      "label": "Tajika Vanguard Cavalry",
-      "detail": "~12,000 shock horse",
+      "label": "Left Flank Wing",
       "side": "umayyad",
       "confidence": "attested_area",
-      "symbol": ["cavalry"],
+      "x": 0.36,
+      "y": 0.34,
+      "anchor": "w"
+    },
+    "umayyad_center": {
+      "role": "army",
+      "label": "Vanguard Shock Host",
+      "side": "umayyad",
+      "confidence": "attested_area",
       "x": 0.50,
-      "y": 0.22,
+      "y": 0.36,
       "anchor": "w"
     },
-    "umayyad_center_infantry": {
+    "umayyad_right": {
       "role": "army",
-      "label": "Caliphate Main Infantry",
-      "detail": "~18,000 foot soldiers",
+      "label": "Right Flank Wing",
       "side": "umayyad",
       "confidence": "attested_area",
-      "symbol": ["infantry"],
-      "x": 0.50,
-      "y": 0.17,
-      "anchor": "w"
-    },
-    "umayyad_left_cavalry": {
-      "role": "army",
-      "label": "Left Flank Horse Archers",
-      "detail": "~7,500 horse archers",
-      "side": "umayyad",
-      "confidence": "attested_area",
-      "symbol": ["cavalry", "archer"],
-      "x": 0.38,
-      "y": 0.20,
-      "anchor": "w"
-    },
-    "umayyad_right_cavalry": {
-      "role": "army",
-      "label": "Right Flank Cavalry",
-      "detail": "~7,500 auxiliary horse",
-      "side": "umayyad",
-      "confidence": "attested_area",
-      "symbol": ["cavalry"],
-      "x": 0.62,
-      "y": 0.20,
+      "x": 0.64,
+      "y": 0.34,
       "anchor": "e"
     },
     "navsari_ford": {
@@ -169,8 +131,8 @@
       "detail": "chokepoint of the clash",
       "side": "neutral",
       "confidence": "attested_area",
-      "x": 0.48,
-      "y": 0.53,
+      "x": 0.50,
+      "y": 0.47,
       "anchor": "e"
     },
     "citadel": {
@@ -178,8 +140,8 @@
       "detail": "headquarters & defense pivot",
       "side": "neutral",
       "confidence": "attested_area",
-      "x": 0.47,
-      "y": 0.82,
+      "x": 0.50,
+      "y": 0.78,
       "anchor": "w"
     }
   },
@@ -194,20 +156,18 @@
       "transition_in": "fade",
       "transition_s": 0.6,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.28, "zoom": 0.70},
-        "end": {"cx": 0.50, "cy": 0.44, "zoom": 0.75}
+        "start": {"cx": 0.50, "cy": 0.45, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.47, "zoom": 0.80}
       },
       "show": [
         "alhakam",
-        "umayyad_vanguard",
-        "umayyad_center_infantry",
-        "umayyad_left_cavalry",
-        "umayyad_right_cavalry",
+        "umayyad_left",
+        "umayyad_center",
+        "umayyad_right",
         "pulakeshin",
-        "pulakeshin_vanguard_elephants",
-        "pulakeshin_infantry_center",
-        "pulakeshin_cavalry_left",
-        "pulakeshin_cavalry_right",
+        "pulakeshin_left",
+        "pulakeshin_center",
+        "pulakeshin_right",
         "navsari_ford",
         "citadel"
       ],
@@ -218,36 +178,29 @@
         "alhakam": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.12},
-            {"t": 0.85, "x": 0.50, "y": 0.22}
+            {"t": 0.10, "x": 0.50, "y": 0.18},
+            {"t": 0.85, "x": 0.50, "y": 0.24}
           ]
         },
-        "umayyad_vanguard": {
+        "umayyad_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.22},
+            {"t": 0.10, "x": 0.36, "y": 0.26},
+            {"t": 0.85, "x": 0.36, "y": 0.34}
+          ]
+        },
+        "umayyad_center": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.50, "y": 0.28},
             {"t": 0.85, "x": 0.50, "y": 0.36}
           ]
         },
-        "umayyad_center_infantry": {
+        "umayyad_right": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.17},
-            {"t": 0.85, "x": 0.50, "y": 0.30}
-          ]
-        },
-        "umayyad_left_cavalry": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.38, "y": 0.20},
-            {"t": 0.85, "x": 0.38, "y": 0.33}
-          ]
-        },
-        "umayyad_right_cavalry": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.62, "y": 0.20},
-            {"t": 0.85, "x": 0.62, "y": 0.33}
+            {"t": 0.10, "x": 0.64, "y": 0.26},
+            {"t": 0.85, "x": 0.64, "y": 0.34}
           ]
         }
       },
@@ -263,70 +216,25 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.62, "zoom": 0.85},
-        "end": {"cx": 0.50, "cy": 0.65, "zoom": 0.85}
+        "start": {"cx": 0.50, "cy": 0.47, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.47, "zoom": 0.80}
       },
       "show": [
         "alhakam",
-        "umayyad_vanguard",
-        "umayyad_center_infantry",
-        "umayyad_left_cavalry",
-        "umayyad_right_cavalry",
+        "umayyad_left",
+        "umayyad_center",
+        "umayyad_right",
         "pulakeshin",
-        "pulakeshin_vanguard_elephants",
-        "pulakeshin_infantry_center",
-        "pulakeshin_cavalry_left",
-        "pulakeshin_cavalry_right",
+        "pulakeshin_left",
+        "pulakeshin_center",
+        "pulakeshin_right",
         "navsari_ford",
         "citadel"
       ],
       "overrides": {},
       "arrows": [],
       "effects": [],
-      "motions": {
-        "alhakam": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.22},
-            {"t": 0.80, "x": 0.50, "y": 0.26}
-          ]
-        },
-        "umayyad_vanguard": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.36},
-            {"t": 0.80, "x": 0.50, "y": 0.44}
-          ]
-        },
-        "umayyad_center_infantry": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.30},
-            {"t": 0.80, "x": 0.50, "y": 0.38}
-          ]
-        },
-        "umayyad_left_cavalry": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.38, "y": 0.33},
-            {"t": 0.80, "x": 0.38, "y": 0.42}
-          ]
-        },
-        "umayyad_right_cavalry": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.10, "x": 0.62, "y": 0.33},
-            {"t": 0.80, "x": 0.62, "y": 0.42}
-          ]
-        },
-        "pulakeshin_vanguard_elephants": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.00, "x": 0.50, "y": 0.64},
-            {"t": 0.80, "x": 0.50, "y": 0.62}
-          ]
-        }
-      },
+      "motions": {},
       "overlays": []
     },
     {
@@ -339,35 +247,32 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.56, "zoom": 0.95},
-        "end": {"cx": 0.50, "cy": 0.56, "zoom": 0.95}
+        "start": {"cx": 0.50, "cy": 0.47, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.47, "zoom": 0.80}
       },
       "show": [
         "alhakam",
-        "umayyad_vanguard",
-        "umayyad_center_infantry",
-        "umayyad_left_cavalry",
-        "umayyad_right_cavalry",
+        "umayyad_left",
+        "umayyad_center",
+        "umayyad_right",
         "pulakeshin",
-        "pulakeshin_vanguard_elephants",
-        "pulakeshin_infantry_center",
-        "pulakeshin_cavalry_left",
-        "pulakeshin_cavalry_right",
+        "pulakeshin_left",
+        "pulakeshin_center",
+        "pulakeshin_right",
         "navsari_ford"
       ],
       "overrides": {
-        "umayyad_vanguard": {
+        "umayyad_center": {
           "keys": [
-            {"t": 0.45, "mark": "shattered"},
-            {"t": 0.80, "mark": "destroyed", "alpha": 0.3}
+            {"t": 0.40, "mark": "shattered"}
           ]
         },
-        "umayyad_left_cavalry": {
+        "umayyad_left": {
           "keys": [
             {"t": 0.50, "mark": "shattered"}
           ]
         },
-        "umayyad_right_cavalry": {
+        "umayyad_right": {
           "keys": [
             {"t": 0.50, "mark": "shattered"}
           ]
@@ -384,46 +289,46 @@
         }
       ],
       "motions": {
-        "umayyad_vanguard": {
+        "umayyad_center": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.44},
-            {"t": 0.65, "x": 0.50, "y": 0.51}
+            {"t": 0.10, "x": 0.50, "y": 0.36},
+            {"t": 0.65, "x": 0.50, "y": 0.41}
           ]
         },
-        "umayyad_left_cavalry": {
+        "umayyad_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.38, "y": 0.42},
-            {"t": 0.65, "x": 0.40, "y": 0.52}
+            {"t": 0.10, "x": 0.36, "y": 0.34},
+            {"t": 0.65, "x": 0.37, "y": 0.40}
           ]
         },
-        "umayyad_right_cavalry": {
+        "umayyad_right": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.62, "y": 0.42},
-            {"t": 0.65, "x": 0.60, "y": 0.52}
+            {"t": 0.10, "x": 0.64, "y": 0.34},
+            {"t": 0.65, "x": 0.63, "y": 0.40}
           ]
         },
-        "pulakeshin_vanguard_elephants": {
+        "pulakeshin_center": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.62},
-            {"t": 0.65, "x": 0.50, "y": 0.55}
+            {"t": 0.10, "x": 0.50, "y": 0.58},
+            {"t": 0.65, "x": 0.50, "y": 0.45}
           ]
         },
-        "pulakeshin_cavalry_left": {
+        "pulakeshin_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.38, "y": 0.67},
-            {"t": 0.65, "x": 0.39, "y": 0.55}
+            {"t": 0.10, "x": 0.36, "y": 0.60},
+            {"t": 0.65, "x": 0.38, "y": 0.46}
           ]
         },
-        "pulakeshin_cavalry_right": {
+        "pulakeshin_right": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.62, "y": 0.67},
-            {"t": 0.65, "x": 0.61, "y": 0.55}
+            {"t": 0.10, "x": 0.64, "y": 0.60},
+            {"t": 0.65, "x": 0.62, "y": 0.46}
           ]
         }
       },
@@ -439,50 +344,42 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.46, "zoom": 0.88},
-        "end": {"cx": 0.50, "cy": 0.46, "zoom": 0.88}
+        "start": {"cx": 0.50, "cy": 0.47, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.47, "zoom": 0.80}
       },
       "show": [
         "alhakam",
-        "umayyad_vanguard",
-        "umayyad_center_infantry",
-        "umayyad_left_cavalry",
-        "umayyad_right_cavalry",
+        "umayyad_left",
+        "umayyad_center",
+        "umayyad_right",
         "pulakeshin",
-        "pulakeshin_vanguard_elephants",
-        "pulakeshin_infantry_center",
-        "pulakeshin_cavalry_left",
-        "pulakeshin_cavalry_right",
+        "pulakeshin_left",
+        "pulakeshin_center",
+        "pulakeshin_right",
         "navsari_ford"
       ],
       "overrides": {
         "alhakam": {
           "keys": [
-            {"t": 0.45, "mark": "killed", "detail": "General Slain in Melee († KIA)"}
+            {"t": 0.40, "mark": "killed", "detail": "General Slain in Melee († KIA)"}
           ]
         },
-        "umayyad_vanguard": {
+        "umayyad_center": {
           "keys": [
-            {"t": 0.0, "mark": "destroyed", "alpha": 0.3},
+            {"t": 0.0, "mark": "shattered", "alpha": 0.8},
+            {"t": 0.35, "mark": "vaporized", "alpha": 0.0}
+          ]
+        },
+        "umayyad_left": {
+          "keys": [
+            {"t": 0.0, "mark": "shattered", "alpha": 0.8},
             {"t": 0.40, "mark": "vaporized", "alpha": 0.0}
           ]
         },
-        "umayyad_left_cavalry": {
+        "umayyad_right": {
           "keys": [
             {"t": 0.0, "mark": "shattered", "alpha": 0.8},
-            {"t": 0.45, "mark": "destroyed", "alpha": 0.0}
-          ]
-        },
-        "umayyad_right_cavalry": {
-          "keys": [
-            {"t": 0.0, "mark": "shattered", "alpha": 0.8},
-            {"t": 0.45, "mark": "destroyed", "alpha": 0.0}
-          ]
-        },
-        "umayyad_center_infantry": {
-          "keys": [
-            {"t": 0.15, "mark": "shattered", "alpha": 0.9},
-            {"t": 0.50, "mark": "destroyed", "alpha": 0.0}
+            {"t": 0.40, "mark": "vaporized", "alpha": 0.0}
           ]
         }
       },
@@ -497,32 +394,25 @@
         }
       ],
       "motions": {
-        "pulakeshin_vanguard_elephants": {
+        "pulakeshin_center": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.05, "x": 0.50, "y": 0.55},
+            {"t": 0.05, "x": 0.50, "y": 0.45},
             {"t": 0.70, "x": 0.50, "y": 0.28}
           ]
         },
-        "pulakeshin_cavalry_left": {
+        "pulakeshin_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.05, "x": 0.39, "y": 0.55},
-            {"t": 0.70, "x": 0.42, "y": 0.26}
+            {"t": 0.05, "x": 0.38, "y": 0.46},
+            {"t": 0.70, "x": 0.42, "y": 0.28}
           ]
         },
-        "pulakeshin_cavalry_right": {
+        "pulakeshin_right": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.05, "x": 0.61, "y": 0.55},
-            {"t": 0.70, "x": 0.58, "y": 0.26}
-          ]
-        },
-        "pulakeshin_infantry_center": {
-          "confidence": "illustrative",
-          "keys": [
-            {"t": 0.05, "x": 0.50, "y": 0.70},
-            {"t": 0.70, "x": 0.50, "y": 0.45}
+            {"t": 0.05, "x": 0.62, "y": 0.46},
+            {"t": 0.70, "x": 0.58, "y": 0.28}
           ]
         }
       },
@@ -538,16 +428,15 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.58, "zoom": 0.80},
-        "end": {"cx": 0.50, "cy": 0.58, "zoom": 0.80}
+        "start": {"cx": 0.50, "cy": 0.47, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.47, "zoom": 0.80}
       },
       "show": [
         "pulakeshin",
         "nagabhata",
-        "pulakeshin_vanguard_elephants",
-        "pulakeshin_infantry_center",
-        "pulakeshin_cavalry_left",
-        "pulakeshin_cavalry_right",
+        "pulakeshin_left",
+        "pulakeshin_center",
+        "pulakeshin_right",
         "navsari_ford",
         "citadel"
       ],
@@ -555,25 +444,25 @@
       "arrows": [],
       "effects": [],
       "motions": {
-        "pulakeshin_vanguard_elephants": {
+        "pulakeshin_center": {
           "confidence": "illustrative",
           "keys": [
             {"t": 0.0, "x": 0.50, "y": 0.28},
-            {"t": 1.0, "x": 0.50, "y": 0.28}
+            {"t": 0.6, "x": 0.50, "y": 0.58}
           ]
         },
-        "pulakeshin_cavalry_left": {
+        "pulakeshin_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.0, "x": 0.42, "y": 0.26},
-            {"t": 1.0, "x": 0.42, "y": 0.26}
+            {"t": 0.0, "x": 0.42, "y": 0.28},
+            {"t": 0.6, "x": 0.36, "y": 0.60}
           ]
         },
-        "pulakeshin_cavalry_right": {
+        "pulakeshin_right": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.0, "x": 0.58, "y": 0.26},
-            {"t": 1.0, "x": 0.58, "y": 0.26}
+            {"t": 0.0, "x": 0.58, "y": 0.28},
+            {"t": 0.6, "x": 0.64, "y": 0.60}
           ]
         }
       },
