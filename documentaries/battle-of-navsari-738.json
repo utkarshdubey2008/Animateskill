@@ -9,6 +9,20 @@
   "height": 720,
   "duration_s": 90,
   "disclaimer": "Schematic tactical battlefield plate, not a survey. Tactical positions based on the Navsari Copperplate Grant (738-739 CE).",
+  "parties": [
+    {
+      "name": "Chalukya-Lata (Pulakeshin)",
+      "side": "chalukya",
+      "army_size": "~35,000",
+      "killed": "~6,000"
+    },
+    {
+      "name": "Umayyad Caliphate (Al-Hakam)",
+      "side": "umayyad",
+      "army_size": "~45,000",
+      "killed": "~25,000+ (ANNIHILATED)"
+    }
+  ],
   "legend": [
     {"swatch": "solid", "text": "Indian Defense Array (Chalukya-Lata)"},
     {"swatch": "hollow", "text": "Umayyad Caliphate (Tajika Army)"},
@@ -36,11 +50,9 @@
       "detail": "Chalukya Supreme Commander",
       "side": "chalukya",
       "confidence": "attested_area",
-      "x": 0.38,
-      "y": 0.70,
-      "anchor": "w",
-      "attach": "chalukya_army",
-      "offset": [-0.035, 0.035]
+      "x": 0.50,
+      "y": 0.76,
+      "anchor": "s"
     },
     "nagabhata": {
       "role": "person",
@@ -49,11 +61,9 @@
       "detail": "Imperial Pratihara Allied Victor",
       "side": "pratihara",
       "confidence": "attested_area",
-      "x": 0.62,
-      "y": 0.70,
-      "anchor": "e",
-      "attach": "chalukya_army",
-      "offset": [0.035, 0.035]
+      "x": 0.65,
+      "y": 0.74,
+      "anchor": "e"
     },
     "alhakam": {
       "role": "person",
@@ -64,31 +74,95 @@
       "confidence": "attested_area",
       "x": 0.50,
       "y": 0.12,
-      "anchor": "n",
-      "attach": "umayyad_army",
-      "offset": [0.0, -0.035]
+      "anchor": "n"
     },
-    "chalukya_army": {
+    "pulakeshin_vanguard_elephants": {
       "role": "army",
-      "label": "Chalukya-Lata Army",
-      "detail": "~35,000 | Victorious (~6,000 casualties)",
+      "label": "Vanguard War Elephants",
+      "detail": "~10,000 elephant corps",
       "side": "chalukya",
       "confidence": "attested_area",
-      "symbol": ["elephant", "cavalry", "infantry"],
+      "symbol": ["elephant"],
       "x": 0.50,
-      "y": 0.65,
-      "anchor": "s"
+      "y": 0.64,
+      "anchor": "w"
     },
-    "umayyad_army": {
+    "pulakeshin_infantry_center": {
       "role": "army",
-      "label": "Umayyad Tajika Army",
-      "detail": "~45,000 | Annihilated (~25,000+ casualties)",
+      "label": "Center Armored Ranks",
+      "detail": "~15,000 infantry",
+      "side": "chalukya",
+      "confidence": "attested_area",
+      "symbol": ["infantry"],
+      "x": 0.50,
+      "y": 0.70,
+      "anchor": "w"
+    },
+    "pulakeshin_cavalry_left": {
+      "role": "army",
+      "label": "Left Flank Cavalry",
+      "detail": "~5,000 cavalry",
+      "side": "chalukya",
+      "confidence": "attested_area",
+      "symbol": ["cavalry"],
+      "x": 0.38,
+      "y": 0.67,
+      "anchor": "w"
+    },
+    "pulakeshin_cavalry_right": {
+      "role": "army",
+      "label": "Right Flank Cavalry",
+      "detail": "~5,000 cavalry",
+      "side": "chalukya",
+      "confidence": "attested_area",
+      "symbol": ["cavalry"],
+      "x": 0.62,
+      "y": 0.67,
+      "anchor": "e"
+    },
+    "umayyad_vanguard": {
+      "role": "army",
+      "label": "Tajika Vanguard Cavalry",
+      "detail": "~12,000 shock horse",
       "side": "umayyad",
       "confidence": "attested_area",
-      "symbol": ["cavalry", "infantry"],
+      "symbol": ["cavalry"],
       "x": 0.50,
-      "y": 0.18,
-      "anchor": "n"
+      "y": 0.22,
+      "anchor": "w"
+    },
+    "umayyad_center_infantry": {
+      "role": "army",
+      "label": "Caliphate Main Infantry",
+      "detail": "~18,000 foot soldiers",
+      "side": "umayyad",
+      "confidence": "attested_area",
+      "symbol": ["infantry"],
+      "x": 0.50,
+      "y": 0.17,
+      "anchor": "w"
+    },
+    "umayyad_left_cavalry": {
+      "role": "army",
+      "label": "Left Flank Horse Archers",
+      "detail": "~7,500 horse archers",
+      "side": "umayyad",
+      "confidence": "attested_area",
+      "symbol": ["cavalry", "archer"],
+      "x": 0.38,
+      "y": 0.20,
+      "anchor": "w"
+    },
+    "umayyad_right_cavalry": {
+      "role": "army",
+      "label": "Right Flank Cavalry",
+      "detail": "~7,500 auxiliary horse",
+      "side": "umayyad",
+      "confidence": "attested_area",
+      "symbol": ["cavalry"],
+      "x": 0.62,
+      "y": 0.20,
+      "anchor": "e"
     },
     "navsari_ford": {
       "label": "Navsari Ford (Purna River)",
@@ -105,7 +179,7 @@
       "side": "neutral",
       "confidence": "attested_area",
       "x": 0.47,
-      "y": 0.78,
+      "y": 0.82,
       "anchor": "w"
     }
   },
@@ -123,23 +197,57 @@
         "start": {"cx": 0.50, "cy": 0.28, "zoom": 0.70},
         "end": {"cx": 0.50, "cy": 0.44, "zoom": 0.75}
       },
-      "show": ["alhakam", "umayyad_army", "chalukya_army", "navsari_ford", "citadel"],
+      "show": [
+        "alhakam",
+        "umayyad_vanguard",
+        "umayyad_center_infantry",
+        "umayyad_left_cavalry",
+        "umayyad_right_cavalry",
+        "pulakeshin",
+        "pulakeshin_vanguard_elephants",
+        "pulakeshin_infantry_center",
+        "pulakeshin_cavalry_left",
+        "pulakeshin_cavalry_right",
+        "navsari_ford",
+        "citadel"
+      ],
       "overrides": {},
       "arrows": [],
       "effects": [],
       "motions": {
-        "umayyad_army": {
+        "alhakam": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.16},
-            {"t": 0.85, "x": 0.50, "y": 0.32}
+            {"t": 0.10, "x": 0.50, "y": 0.12},
+            {"t": 0.85, "x": 0.50, "y": 0.22}
           ]
         },
-        "chalukya_army": {
+        "umayyad_vanguard": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.00, "x": 0.50, "y": 0.65},
-            {"t": 1.00, "x": 0.50, "y": 0.65}
+            {"t": 0.10, "x": 0.50, "y": 0.22},
+            {"t": 0.85, "x": 0.50, "y": 0.36}
+          ]
+        },
+        "umayyad_center_infantry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.50, "y": 0.17},
+            {"t": 0.85, "x": 0.50, "y": 0.30}
+          ]
+        },
+        "umayyad_left_cavalry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.38, "y": 0.20},
+            {"t": 0.85, "x": 0.38, "y": 0.33}
+          ]
+        },
+        "umayyad_right_cavalry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.62, "y": 0.20},
+            {"t": 0.85, "x": 0.62, "y": 0.33}
           ]
         }
       },
@@ -158,23 +266,64 @@
         "start": {"cx": 0.50, "cy": 0.62, "zoom": 0.85},
         "end": {"cx": 0.50, "cy": 0.65, "zoom": 0.85}
       },
-      "show": ["pulakeshin", "chalukya_army", "umayyad_army", "navsari_ford", "citadel"],
+      "show": [
+        "alhakam",
+        "umayyad_vanguard",
+        "umayyad_center_infantry",
+        "umayyad_left_cavalry",
+        "umayyad_right_cavalry",
+        "pulakeshin",
+        "pulakeshin_vanguard_elephants",
+        "pulakeshin_infantry_center",
+        "pulakeshin_cavalry_left",
+        "pulakeshin_cavalry_right",
+        "navsari_ford",
+        "citadel"
+      ],
       "overrides": {},
       "arrows": [],
       "effects": [],
       "motions": {
-        "umayyad_army": {
+        "alhakam": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.32},
+            {"t": 0.10, "x": 0.50, "y": 0.22},
+            {"t": 0.80, "x": 0.50, "y": 0.26}
+          ]
+        },
+        "umayyad_vanguard": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.50, "y": 0.36},
             {"t": 0.80, "x": 0.50, "y": 0.44}
           ]
         },
-        "chalukya_army": {
+        "umayyad_center_infantry": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.00, "x": 0.50, "y": 0.65},
-            {"t": 0.80, "x": 0.50, "y": 0.63}
+            {"t": 0.10, "x": 0.50, "y": 0.30},
+            {"t": 0.80, "x": 0.50, "y": 0.38}
+          ]
+        },
+        "umayyad_left_cavalry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.38, "y": 0.33},
+            {"t": 0.80, "x": 0.38, "y": 0.42}
+          ]
+        },
+        "umayyad_right_cavalry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.62, "y": 0.33},
+            {"t": 0.80, "x": 0.62, "y": 0.42}
+          ]
+        },
+        "pulakeshin_vanguard_elephants": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.00, "x": 0.50, "y": 0.64},
+            {"t": 0.80, "x": 0.50, "y": 0.62}
           ]
         }
       },
@@ -190,11 +339,40 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.58, "zoom": 0.95},
-        "end": {"cx": 0.50, "cy": 0.58, "zoom": 0.95}
+        "start": {"cx": 0.50, "cy": 0.56, "zoom": 0.95},
+        "end": {"cx": 0.50, "cy": 0.56, "zoom": 0.95}
       },
-      "show": ["alhakam", "pulakeshin", "umayyad_army", "chalukya_army", "navsari_ford"],
-      "overrides": {},
+      "show": [
+        "alhakam",
+        "umayyad_vanguard",
+        "umayyad_center_infantry",
+        "umayyad_left_cavalry",
+        "umayyad_right_cavalry",
+        "pulakeshin",
+        "pulakeshin_vanguard_elephants",
+        "pulakeshin_infantry_center",
+        "pulakeshin_cavalry_left",
+        "pulakeshin_cavalry_right",
+        "navsari_ford"
+      ],
+      "overrides": {
+        "umayyad_vanguard": {
+          "keys": [
+            {"t": 0.45, "mark": "shattered"},
+            {"t": 0.80, "mark": "destroyed", "alpha": 0.3}
+          ]
+        },
+        "umayyad_left_cavalry": {
+          "keys": [
+            {"t": 0.50, "mark": "shattered"}
+          ]
+        },
+        "umayyad_right_cavalry": {
+          "keys": [
+            {"t": 0.50, "mark": "shattered"}
+          ]
+        }
+      },
       "arrows": [],
       "effects": [
         {
@@ -206,18 +384,46 @@
         }
       ],
       "motions": {
-        "umayyad_army": {
+        "umayyad_vanguard": {
           "confidence": "illustrative",
           "keys": [
             {"t": 0.10, "x": 0.50, "y": 0.44},
-            {"t": 0.75, "x": 0.50, "y": 0.51}
+            {"t": 0.65, "x": 0.50, "y": 0.51}
           ]
         },
-        "chalukya_army": {
+        "umayyad_left_cavalry": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.10, "x": 0.50, "y": 0.63},
-            {"t": 0.75, "x": 0.50, "y": 0.56}
+            {"t": 0.10, "x": 0.38, "y": 0.42},
+            {"t": 0.65, "x": 0.40, "y": 0.52}
+          ]
+        },
+        "umayyad_right_cavalry": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.62, "y": 0.42},
+            {"t": 0.65, "x": 0.60, "y": 0.52}
+          ]
+        },
+        "pulakeshin_vanguard_elephants": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.50, "y": 0.62},
+            {"t": 0.65, "x": 0.50, "y": 0.55}
+          ]
+        },
+        "pulakeshin_cavalry_left": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.38, "y": 0.67},
+            {"t": 0.65, "x": 0.39, "y": 0.55}
+          ]
+        },
+        "pulakeshin_cavalry_right": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.10, "x": 0.62, "y": 0.67},
+            {"t": 0.65, "x": 0.61, "y": 0.55}
           ]
         }
       },
@@ -225,7 +431,7 @@
     },
     {
       "id": "rout-annihilation",
-      "title": "Caliphate Army Annihilated & General Slain",
+      "title": "Armies Advance & Al-Hakam Slain",
       "start_s": 54,
       "end_s": 72,
       "narration": "Enveloped against the tidal marshes, the Caliphate army broke into catastrophic rout. General Al-Hakam was slain in the melee, and over twenty-five thousand Tajika invaders fell or were captured, completely shattering the invasion force.",
@@ -233,21 +439,50 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.56, "zoom": 0.95},
-        "end": {"cx": 0.50, "cy": 0.56, "zoom": 0.95}
+        "start": {"cx": 0.50, "cy": 0.46, "zoom": 0.88},
+        "end": {"cx": 0.50, "cy": 0.46, "zoom": 0.88}
       },
-      "show": ["alhakam", "pulakeshin", "umayyad_army", "chalukya_army", "navsari_ford"],
+      "show": [
+        "alhakam",
+        "umayyad_vanguard",
+        "umayyad_center_infantry",
+        "umayyad_left_cavalry",
+        "umayyad_right_cavalry",
+        "pulakeshin",
+        "pulakeshin_vanguard_elephants",
+        "pulakeshin_infantry_center",
+        "pulakeshin_cavalry_left",
+        "pulakeshin_cavalry_right",
+        "navsari_ford"
+      ],
       "overrides": {
         "alhakam": {
           "keys": [
-            {"t": 0.40, "mark": "killed", "detail": "killed in action (~25,000+ casualties)"}
+            {"t": 0.45, "mark": "killed", "detail": "General Slain in Melee († KIA)"}
           ]
         },
-        "umayyad_army": {
+        "umayyad_vanguard": {
           "keys": [
-            {"t": 0.0, "alpha": 1.0},
-            {"t": 0.45, "alpha": 1.0},
-            {"t": 0.75, "alpha": 0.0}
+            {"t": 0.0, "mark": "destroyed", "alpha": 0.3},
+            {"t": 0.40, "mark": "vaporized", "alpha": 0.0}
+          ]
+        },
+        "umayyad_left_cavalry": {
+          "keys": [
+            {"t": 0.0, "mark": "shattered", "alpha": 0.8},
+            {"t": 0.45, "mark": "destroyed", "alpha": 0.0}
+          ]
+        },
+        "umayyad_right_cavalry": {
+          "keys": [
+            {"t": 0.0, "mark": "shattered", "alpha": 0.8},
+            {"t": 0.45, "mark": "destroyed", "alpha": 0.0}
+          ]
+        },
+        "umayyad_center_infantry": {
+          "keys": [
+            {"t": 0.15, "mark": "shattered", "alpha": 0.9},
+            {"t": 0.50, "mark": "destroyed", "alpha": 0.0}
           ]
         }
       },
@@ -255,25 +490,39 @@
       "effects": [
         {
           "type": "clash",
-          "marker": "navsari_ford",
-          "t0": 0.10,
-          "t1": 0.60,
-          "intensity": 0.85
+          "marker": "alhakam",
+          "t0": 0.20,
+          "t1": 0.65,
+          "intensity": 0.90
         }
       ],
       "motions": {
-        "chalukya_army": {
+        "pulakeshin_vanguard_elephants": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.05, "x": 0.50, "y": 0.56},
-            {"t": 0.75, "x": 0.50, "y": 0.48}
+            {"t": 0.05, "x": 0.50, "y": 0.55},
+            {"t": 0.70, "x": 0.50, "y": 0.28}
           ]
         },
-        "umayyad_army": {
+        "pulakeshin_cavalry_left": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.05, "x": 0.50, "y": 0.51},
-            {"t": 0.75, "x": 0.50, "y": 0.48}
+            {"t": 0.05, "x": 0.39, "y": 0.55},
+            {"t": 0.70, "x": 0.42, "y": 0.26}
+          ]
+        },
+        "pulakeshin_cavalry_right": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.05, "x": 0.61, "y": 0.55},
+            {"t": 0.70, "x": 0.58, "y": 0.26}
+          ]
+        },
+        "pulakeshin_infantry_center": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.05, "x": 0.50, "y": 0.70},
+            {"t": 0.70, "x": 0.50, "y": 0.45}
           ]
         }
       },
@@ -289,19 +538,42 @@
       "transition_in": "dissolve",
       "transition_s": 0.5,
       "camera": {
-        "start": {"cx": 0.50, "cy": 0.60, "zoom": 0.80},
-        "end": {"cx": 0.50, "cy": 0.60, "zoom": 0.80}
+        "start": {"cx": 0.50, "cy": 0.58, "zoom": 0.80},
+        "end": {"cx": 0.50, "cy": 0.58, "zoom": 0.80}
       },
-      "show": ["pulakeshin", "nagabhata", "chalukya_army", "navsari_ford", "citadel"],
+      "show": [
+        "pulakeshin",
+        "nagabhata",
+        "pulakeshin_vanguard_elephants",
+        "pulakeshin_infantry_center",
+        "pulakeshin_cavalry_left",
+        "pulakeshin_cavalry_right",
+        "navsari_ford",
+        "citadel"
+      ],
       "overrides": {},
       "arrows": [],
       "effects": [],
       "motions": {
-        "chalukya_army": {
+        "pulakeshin_vanguard_elephants": {
           "confidence": "illustrative",
           "keys": [
-            {"t": 0.0, "x": 0.50, "y": 0.48},
-            {"t": 1.0, "x": 0.50, "y": 0.48}
+            {"t": 0.0, "x": 0.50, "y": 0.28},
+            {"t": 1.0, "x": 0.50, "y": 0.28}
+          ]
+        },
+        "pulakeshin_cavalry_left": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.42, "y": 0.26},
+            {"t": 1.0, "x": 0.42, "y": 0.26}
+          ]
+        },
+        "pulakeshin_cavalry_right": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.58, "y": 0.26},
+            {"t": 1.0, "x": 0.58, "y": 0.26}
           ]
         }
       },
@@ -315,7 +587,7 @@
             "BATTLE OF NAVSARI (c. 738 CE) — COMPLETE TRIUMPH",
             "Indian Commander: Avanijanashraya Pulakeshin (~35,000 troops, ~6,000 casualties)",
             "Invader General: Al-Hakam ibn Awana († KIA, ~25,000+ casualties, army annihilated)",
-            "Allied Northern Victor: Nagabhata I (Gurjara-Pratihara) — India Shielded for 300 Years"
+            "Northern Allied Victor: Nagabhata I (Gurjara-Pratihara) — India Shielded for 300 Years"
           ]
         }
       ]

@@ -350,7 +350,51 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
         half_w = box_w // 2
         half_h = box_h // 2
         rect = [sx - half_w, sy - half_h, sx + half_w, sy + half_h]
-        if marker.confidence == "attested_area":
+        is_destroyed = state["mark"] in ("destroyed", "shattered", "vaporized")
+
+        if is_destroyed:
+            # Render fragmented, shattered shards dispersing outwards
+            shard_disp = max(6, int(14 * scale * (1.2 + (1.0 - state["alpha"]))))
+            # Draw 4 fragmented polygonal shards flying apart
+            shards = [
+                # Top-left shard
+                [(sx - half_w - shard_disp, sy - half_h - shard_disp),
+                 (sx - shard_disp, sy - half_h - shard_disp * 1.2),
+                 (sx - shard_disp * 0.8, sy - shard_disp * 0.5),
+                 (sx - half_w - shard_disp * 1.2, sy - shard_disp * 0.4)],
+                # Top-right shard
+                [(sx + shard_disp, sy - half_h - shard_disp * 1.2),
+                 (sx + half_w + shard_disp, sy - half_h - shard_disp),
+                 (sx + half_w + shard_disp * 1.2, sy - shard_disp * 0.4),
+                 (sx + shard_disp * 0.8, sy - shard_disp * 0.5)],
+                # Bottom-left shard
+                [(sx - half_w - shard_disp * 1.2, sy + shard_disp * 0.4),
+                 (sx - shard_disp * 0.8, sy + shard_disp * 0.5),
+                 (sx - shard_disp, sy + half_h + shard_disp * 1.2),
+                 (sx - half_w - shard_disp, sy + half_h + shard_disp)],
+                # Bottom-right shard
+                [(sx + shard_disp * 0.8, sy + shard_disp * 0.5),
+                 (sx + half_w + shard_disp * 1.2, sy + shard_disp * 0.4),
+                 (sx + half_w + shard_disp, sy + half_h + shard_disp),
+                 (sx + shard_disp, sy + half_h + shard_disp * 1.2)],
+            ]
+            for shard in shards:
+                draw.polygon(
+                    shard,
+                    fill=(*color, int(alpha * 0.65)),
+                    outline=(230, 60, 40, alpha),
+                )
+            # Crack lines through center
+            draw.line([(sx - half_w - shard_disp, sy - shard_disp), (sx + half_w + shard_disp, sy + shard_disp)], fill=(255, 100, 40, alpha), width=max(1, int(2 * scale)))
+            draw.line([(sx - shard_disp, sy - half_h - shard_disp), (sx + shard_disp, sy + half_h + shard_disp)], fill=(255, 100, 40, alpha), width=max(1, int(2 * scale)))
+            # Vaporization ember particles dispersing outward
+            for p_angle in (0, 45, 90, 135, 180, 225, 270, 315):
+                rad = math.radians(p_angle)
+                dist = (half_w + shard_disp * 1.4)
+                px = sx + int(dist * math.cos(rad))
+                py = sy + int(dist * math.sin(rad))
+                draw.ellipse([px - 2, py - 2, px + 2, py + 2], fill=(255, 180, 50, int(alpha * 0.85)))
+        elif marker.confidence == "attested_area":
             draw.rectangle(
                 rect,
                 fill=(*color, int(alpha * 0.85)),
@@ -364,8 +408,8 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
                 outline=(*color, alpha),
                 width=max(2, int(3 * scale)),
             )
-        # Unit symbols inside
-        if marker.symbol:
+        # Unit symbols inside (only if intact)
+        if marker.symbol and not is_destroyed:
             sym_count = len(marker.symbol)
             icon_size = max(14, int(round(18 * scale)))
             gap = max(2, int(round(3 * scale)))
@@ -433,9 +477,9 @@ def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_
                 width=max(2, int(3 * scale)),
             )
 
-    if state["mark"] == "killed":
+    if state["mark"] in ("killed", "destroyed", "shattered", "vaporized"):
         span = radius + max(4, int(6 * scale))
-        kill = (240, 60, 60, alpha) if marker.role == "person" else (*PAPER, alpha)
+        kill = (240, 60, 60, alpha)
         width = max(3, int(3.5 * scale))
         draw.line([(sx - span, sy - span), (sx + span, sy + span)], fill=kill, width=width)
         draw.line([(sx - span, sy + span), (sx + span, sy - span)], fill=kill, width=width)
@@ -604,8 +648,52 @@ def _draw_ui(frame: Image.Image, ctx: FrameContext, scene: Scene) -> None:
         line2 = scene.title
     line2_y = pad + _text_height(title_font) + 4
     draw.text((pad, line2_y), line2, font=meta_font, fill=MUTED)
-    _draw_legend(frame, ctx, pad, line2_y + _text_height(meta_font) + 12)
+    hud_y = line2_y + _text_height(meta_font) + 10
+    hud_h = _draw_parties_hud(frame, ctx, pad, hud_y)
+    legend_y = hud_y + hud_h + 8 if hud_h > 0 else hud_y
+    _draw_legend(frame, ctx, pad, legend_y)
     _draw_caption(ImageDraw.Draw(frame), ctx, scene.narration, pad)
+
+
+def _draw_parties_hud(frame: Image.Image, ctx: FrameContext, x: int, y: int) -> int:
+    if not ctx.doc.parties:
+        return 0
+    scale = ctx.height / 720
+    header_font = _font(ctx.fonts.sans_bold, max(9, int(11 * scale)))
+    name_font = _font(ctx.fonts.sans_bold, max(11, int(13 * scale)))
+    stats_font = _font(ctx.fonts.sans, max(10, int(12 * scale)))
+
+    pad = 8
+    flag_w = max(22, int(26 * scale))
+    flag_h = max(14, int(17 * scale))
+
+    box_w = max(250, int(310 * scale))
+    header_h = _text_height(header_font) + 4
+    row_h = max(flag_h, _text_height(name_font) + _text_height(stats_font) + 4) + 6
+    box_h = pad * 2 + header_h + len(ctx.doc.parties) * row_h
+
+    panel = Image.new("RGBA", (box_w, box_h), (10, 14, 18, 220))
+    pdraw = ImageDraw.Draw(panel)
+    pdraw.rounded_rectangle([0, 0, box_w - 1, box_h - 1], radius=6, outline=(60, 72, 88, 200), width=1)
+    pdraw.rectangle([pad, pad - 2, pad + 24, pad], fill=(212, 175, 55, 230))
+
+    pdraw.text((pad, pad), "FORCES & CASUALTIES", font=header_font, fill=(212, 175, 55, 240))
+
+    curr_y = pad + header_h + 2
+    for p_idx, party in enumerate(ctx.doc.parties):
+        if p_idx > 0:
+            pdraw.line([(pad, curr_y - 3), (box_w - pad, curr_y - 3)], fill=(45, 55, 68, 180), width=1)
+        flag_img = _load_flag_image(party.side, flag_w, flag_h)
+        if flag_img is not None:
+            panel.paste(flag_img, (pad, curr_y + 1), flag_img)
+        text_x = pad + flag_w + 8
+        pdraw.text((text_x, curr_y - 1), party.name, font=name_font, fill=PAPER)
+        stats_line = f"Force: {party.army_size}  |  Losses: {party.killed}" if party.killed else f"Force: {party.army_size}"
+        pdraw.text((text_x, curr_y + _text_height(name_font) + 2), stats_line, font=stats_font, fill=(200, 210, 225, 230))
+        curr_y += row_h
+
+    frame.paste(panel, (x, y), panel)
+    return box_h
 
 
 def _draw_legend(frame: Image.Image, ctx: FrameContext, x: int, y: int) -> None:

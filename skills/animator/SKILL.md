@@ -96,7 +96,67 @@ description: >
 
 ---
 
-## 6. Render & Validation Pipeline
+## 6. Multi-Box Formations & Vanguard Screening
+
+- **Monarch / General Rear Command Position**: The monarch or supreme commander is rendered as a circular portrait figure (`shape: "circle"`, `is_commander: true`) positioned in the rear tactical reserve or headquarters line.
+- **3–5 Formation Boxes Ahead**: Deploy 3 to 5 distinct rectangular formation boxes ahead of the monarch's position to represent tactical echelons:
+  - **Vanguard**: Elephant screen or shock vanguard (`kind: "elephant"` or `"cavalry"`).
+  - **Center**: Main infantry line (`kind: "infantry"`).
+  - **Flanks**: Left and right cavalry wings or archer contingents (`kind: "cavalry"`, `"archer"`).
+- **Advancing Formation Waves**: Animate movement using scene `motions` interpolating positions across keyframes, moving formation boxes forward into combat contact.
+
+---
+
+## 7. Box Destruction: Fragmentation & Vaporization
+
+- **Loss Mechanics Without Anachronistic Gunpowder Blasts**: In ancient and medieval warfare, defeating an army unit must not use cannonballs or explosives. Instead, unit destruction is visualized via structural disintegration:
+- **Destruction Marks**: Set `"mark": "shattered"`, `"destroyed"`, or `"vaporized"` in unit keyframes.
+- **Visual Rendering**:
+  - The rectangular formation box splits into 4 angular polygonal shards flying outward along expansion vectors.
+  - Fracture seams (jagged white/amber fracture lines) cut through the unit boundary.
+  - A cloud of high-velocity dispersing ember and dust particles radiates outward from the unit centroid.
+  - Box opacity fades out as fragments expand, cleanly dissolving the defeated division from the field.
+
+---
+
+## 8. Left-Hand Tactical Forces & Casualty HUD
+
+- **Scoreboard Box Layout**: Positioned on the left side of the screen (`x: 24`, `y: 92`, `width: 250`), well above subtitles and tactical legends.
+- **Top-Level Documentary Schema**:
+  ```json
+  "parties": [
+    {
+      "name": "Chalukya-Lata Kingdom",
+      "side": "chalukya",
+      "flag": "chalukya",
+      "army_size": "~35,000",
+      "killed": "~6,000 casualties"
+    },
+    {
+      "name": "Umayyad Caliphate",
+      "side": "umayyad",
+      "flag": "umayyad",
+      "army_size": "~45,000",
+      "killed": "~25,000+ killed / routed"
+    }
+  ]
+  ```
+- **HUD Components**:
+  - Dark translucent HUD card background (`rgba(10, 16, 26, 0.88)` with subtle cyan border).
+  - Mini flag thumbnails mounted beside party names.
+  - Total initial army force size.
+  - Accurate casualty count and status (victorious vs annihilated).
+
+---
+
+## 9. Commander Elimination (Regicide Execution)
+
+- **Victorious Advance Overrun**: After the forward 3–5 enemy formation boxes are shattered and vaporized, the victorious division boxes advance directly into the enemy rear command position.
+- **Leader Termination**: The opposing commander circle is stamped with `"mark": "killed"`, drawing a heavy crimson saltire cross (`X`) with glowing red perimeter, updating the status label to `"killed in action"`.
+
+---
+
+## 10. Render & Validation Pipeline
 
 1. **Smoke Preview**:
    ```bash

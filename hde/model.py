@@ -16,9 +16,18 @@ ANCHORS = {"n", "s", "e", "w"}
 TRANSITIONS = {"cut", "fade", "dissolve"}
 EFFECT_TYPES = {"rain", "artillery", "clash"}
 OVERLAY_TYPES = {"card"}
-MARKS = {"killed"}
+MARKS = {"killed", "destroyed", "shattered", "vaporized", "routed"}
 SWATCHES = {"solid", "hollow", "dashed"}
 SLUG = re.compile(r"[a-z0-9][a-z0-9-]*")
+
+
+@dataclass
+class Party:
+    name: str
+    side: str
+    flag: str | None = None
+    army_size: str = ""
+    killed: str = ""
 
 
 @dataclass
@@ -157,6 +166,7 @@ class Documentary:
     markers: dict[str, MarkerDef]
     scenes: list[Scene]
     sources: list[SourceNote]
+    parties: list[Party] = field(default_factory=list)
     root: Path = field(default=ROOT)
 
 
@@ -221,6 +231,7 @@ def load_documentary(path: Path) -> Documentary:
             "markers",
             "scenes",
             "sources",
+            "parties",
         },
         where,
     )
@@ -267,6 +278,21 @@ def load_documentary(path: Path) -> Documentary:
     scenes = _scenes(data.get("scenes"), markers, f"{where}.scenes")
     _check_timeline(scenes, duration_s, where)
     sources = _sources(data.get("sources"), f"{where}.sources")
+    parties_raw = data.get("parties", [])
+    parties: list[Party] = []
+    if isinstance(parties_raw, list):
+        for idx, item in enumerate(parties_raw):
+            spot = f"{where}.parties[{idx}]"
+            if isinstance(item, dict):
+                parties.append(
+                    Party(
+                        name=_string(item, "name", spot),
+                        side=_string(item, "side", spot),
+                        flag=item.get("flag"),
+                        army_size=str(item.get("army_size", "")),
+                        killed=str(item.get("killed", "")),
+                    )
+                )
 
     return Documentary(
         id=doc_id,
@@ -287,6 +313,7 @@ def load_documentary(path: Path) -> Documentary:
         markers=markers,
         scenes=scenes,
         sources=sources,
+        parties=parties,
         root=ROOT,
     )
 
