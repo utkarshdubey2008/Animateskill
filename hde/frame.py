@@ -118,6 +118,8 @@ def compose_scene(ctx: FrameContext, scene: Scene, t: float, frame_index: int) -
     for effect in scene.effects:
         if effect.type == "artillery":
             _draw_artillery(draw, ctx, effect, t, frame_index, box, map_w, map_h)
+        elif effect.type == "clash":
+            _draw_clash(draw, ctx, effect, t, frame_index, box, map_w, map_h)
     pos_memo: dict = {}
     for marker_id in scene.show:
         if marker_id in ctx.doc.markers:
@@ -207,6 +209,40 @@ def _draw_artillery(draw, ctx, effect, t, frame_index, box, map_w, map_h) -> Non
     draw.ellipse(
         [cx - inner_r, cy - inner_r, cx + inner_r, cy + inner_r],
         fill=(255, 255, 240, int(240 * amount)),
+    )
+
+
+def _draw_clash(draw, ctx, effect, t, frame_index, box, map_w, map_h) -> None:
+    amount = pulse(t, effect.t0, effect.t1, 0.04)
+    if amount <= 0 or frame_index % 6 > 3:
+        return
+    marker = ctx.doc.markers[effect.marker]
+    sx, sy = project(marker.x, marker.y, box, ctx.width, ctx.height, map_w, map_h)
+    scale = ctx.height / 720
+    phase = frame_index % 6
+    jitter_x = ((frame_index * 17) % 9) - 4
+    jitter_y = ((frame_index * 13) % 9) - 4
+    cx, cy = sx + jitter_x, sy + jitter_y
+
+    # Pre-gunpowder tactical melee pulse & battle dust ring
+    outer_r = max(8, int((14 + phase * 4) * scale))
+    draw.ellipse(
+        [cx - outer_r, cy - outer_r, cx + outer_r, cy + outer_r],
+        fill=(210, 180, 140, int(60 * amount)),
+        outline=(255, 215, 0, int(180 * amount)),
+        width=max(1, int(2 * scale)),
+    )
+    # Tactical clash spark / crossing blades flash
+    spark_len = max(6, int((10 + phase * 2) * scale))
+    draw.line(
+        [(cx - spark_len, cy - spark_len), (cx + spark_len, cy + spark_len)],
+        fill=(255, 245, 180, int(220 * amount)),
+        width=max(2, int(2.5 * scale)),
+    )
+    draw.line(
+        [(cx - spark_len, cy + spark_len), (cx + spark_len, cy - spark_len)],
+        fill=(255, 245, 180, int(220 * amount)),
+        width=max(2, int(2.5 * scale)),
     )
 
 

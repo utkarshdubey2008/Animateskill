@@ -14,7 +14,7 @@ MARKER_CONFIDENCE = {"attested_area", "approximate"}
 ARROW_CONFIDENCE = {"illustrative", "attested"}
 ANCHORS = {"n", "s", "e", "w"}
 TRANSITIONS = {"cut", "fade", "dissolve"}
-EFFECT_TYPES = {"rain", "artillery"}
+EFFECT_TYPES = {"rain", "artillery", "clash"}
 OVERLAY_TYPES = {"card"}
 MARKS = {"killed"}
 SWATCHES = {"solid", "hollow", "dashed"}
@@ -490,9 +490,9 @@ def _effects(value: object, markers: dict[str, MarkerDef], where: str) -> list[E
         if kind not in EFFECT_TYPES:
             raise ValueError(f"{spot}.type must be one of {sorted(EFFECT_TYPES)}")
         marker = item.get("marker")
-        if kind == "artillery":
+        if kind in ("artillery", "clash"):
             if not isinstance(marker, str) or marker not in markers:
-                raise ValueError(f"{spot}: artillery requires a known marker")
+                raise ValueError(f"{spot}: {kind} requires a known marker")
         elif marker not in (None,):
             raise ValueError(f"{spot}: rain does not take a marker")
         t0 = _as_unit(_number(item, "t0", spot), f"{spot}.t0")

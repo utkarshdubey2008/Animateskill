@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="fieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181c22"/>
+      <stop offset="50%" stop-color="#1d2229"/>
+      <stop offset="100%" stop-color="#15181e"/>
+    </linearGradient>
+    <linearGradient id="marshGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#152028" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1c2d38" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="estuaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e2238"/>
+      <stop offset="100%" stop-color="#143354"/>
+    </linearGradient>
+    <style>
+      .river-bed { fill: none; stroke: #102a45; stroke-linecap: round; stroke-linejoin: round; }
+      .river-main { fill: none; stroke: #25689e; stroke-linecap: round; stroke-linejoin: round; }
+      .river-core { fill: none; stroke: #4ea2de; stroke-linecap: round; stroke-linejoin: round; }
+      .marsh-line { fill: none; stroke: #2f4c60; stroke-width: 1.5; stroke-dasharray: 4 4; }
+      .earthwork { fill: none; stroke: #6b5838; stroke-width: 3.5; stroke-dasharray: 8 4; }
+      .palisade { fill: none; stroke: #8a7248; stroke-width: 2; stroke-dasharray: 2 4; }
+      .elevation-contour { fill: none; stroke: #2e3742; stroke-width: 1; stroke-dasharray: 6 6; }
+      .topo-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 13px; font-weight: bold; fill: #7e8f9f; letter-spacing: 2px; }
+      .tactical-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 12px; font-weight: bold; fill: #d5dde5; letter-spacing: 1.5px; }
+      .water-text { font-family: 'Liberation Sans', 'DejaVu Sans', sans-serif; font-size: 13px; font-style: italic; fill: #5c93c4; letter-spacing: 1.5px; }
+    </style>
+  </defs>
+
+  <!-- 1. Tactical Battlefield Ground -->
+  <rect width="1600" height="900" fill="url(#fieldGrad)"/>
+
+  <!-- 2. Elevation Contours & Terrain Ridges -->
+  <path d="M 0,200 Q 400,220 800,190 T 1600,210" class="elevation-contour"/>
+  <path d="M 0,380 Q 500,410 900,370 T 1600,390" class="elevation-contour"/>
+  <path d="M 0,580 Q 450,560 950,590 T 1600,570" class="elevation-contour"/>
+  <path d="M 0,760 Q 550,780 1050,750 T 1600,770" class="elevation-contour"/>
+
+  <!-- 3. Coastal Estuary & Tidal Mudflats (Western Flank) -->
+  <path d="M 0,0 L 260,0 C 240,150 200,280 230,420 C 260,560 210,700 240,900 L 0,900 Z" fill="url(#estuaryGrad)"/>
+  <path d="M 260,0 C 240,150 200,280 230,420 C 260,560 210,700 240,900" fill="none" stroke="#25689e" stroke-width="3"/>
+  <!-- Tidal Mangrove Marshes -->
+  <polygon points="240,220 380,260 360,400 230,380" fill="url(#marshGrad)" stroke="#2f4c60" stroke-width="1" stroke-dasharray="4 4"/>
+  <polygon points="230,520 370,550 350,720 220,680" fill="url(#marshGrad)" stroke="#2f4c60" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="70" y="460" class="water-text" transform="rotate(-90 70 460)">COASTAL TIDAL ESTUARY (ARABIAN SEA FLANK)</text>
+  <text x="265" y="330" class="water-text" style="font-size: 10px;">Salt Marshes</text>
+  <text x="260" y="630" class="water-text" style="font-size: 10px;">Mangrove Flats</text>
+
+  <!-- 4. Purna River (Meandering Battlefield Waterway) -->
+  <!-- Main channel crossing from East to West across the tactical center -->
+  <path d="M 1600,480 C 1300,470 1080,510 920,490 C 760,470 640,530 480,510 C 360,495 290,470 230,480" class="river-bed" stroke-width="22"/>
+  <path d="M 1600,480 C 1300,470 1080,510 920,490 C 760,470 640,530 480,510 C 360,495 290,470 230,480" class="river-main" stroke-width="14"/>
+  <path d="M 1600,480 C 1300,470 1080,510 920,490 C 760,470 640,530 480,510 C 360,495 290,470 230,480" class="river-core" stroke-width="5"/>
+  
+  <!-- Southern Ambika River Tributary -->
+  <path d="M 1600,820 C 1200,810 950,830 700,820 C 500,810 380,840 240,830" class="river-bed" stroke-width="12"/>
+  <path d="M 1600,820 C 1200,810 950,830 700,820 C 500,810 380,840 240,830" class="river-main" stroke-width="7"/>
+  <path d="M 1600,820 C 1200,810 950,830 700,820 C 500,810 380,840 240,830" class="river-core" stroke-width="2"/>
+
+  <!-- Northern Approach Creek (Natural Obstacle) -->
+  <path d="M 1200,0 C 1050,90 920,130 840,190 C 760,250 680,240 580,260 C 480,280 400,260 330,240" class="river-bed" stroke-width="10"/>
+  <path d="M 1200,0 C 1050,90 920,130 840,190 C 760,250 680,240 580,260 C 480,280 400,260 330,240" class="river-main" stroke-width="5"/>
+  <path d="M 1200,0 C 1050,90 920,130 840,190 C 760,250 680,240 580,260 C 480,280 400,260 330,240" class="river-core" stroke-width="1.5"/>
+
+  <text x="980" y="465" class="water-text">PURNA RIVER (TACTICAL WATERWAY)</text>
+  <text x="1020" y="805" class="water-text" style="font-size: 11px;">Ambika Estuary</text>
+
+  <!-- 5. Tactical Crossings, Earthworks & Defenses -->
+  <!-- Navsari Main Ford Crossing (Center bottleneck) -->
+  <g transform="translate(740, 480)">
+    <line x1="-30" y1="-20" x2="30" y2="20" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="3 3"/>
+    <rect x="-40" y="-12" width="80" height="24" fill="#1a202c" fill-opacity="0.7" stroke="#e2a03f" stroke-width="1" rx="3"/>
+    <text x="0" y="4" text-anchor="middle" class="tactical-text" fill="#ffd700" style="font-size: 10px;">NAVSARI FORD</text>
+  </g>
+
+  <!-- Southern Defense Earthworks / Redoubts (Chalukya lines) -->
+  <path d="M 520,570 Q 750,560 980,570" class="earthwork"/>
+  <path d="M 515,575 Q 750,565 985,575" class="palisade"/>
+  <text x="750" y="600" text-anchor="middle" class="tactical-text" fill="#b89758" style="font-size: 11px;">CHALUKYA DEFENSIVE EARTHWORKS &amp; ELEPHANT LINE</text>
+
+  <!-- 6. Navsari Citadel & Fortifications (South of Purna River) -->
+  <g transform="translate(750, 720)">
+    <!-- Outer wall polygon -->
+    <polygon points="-120,-40 120,-40 140,40 -140,40" fill="#222a35" stroke="#9aa6b2" stroke-width="2.5"/>
+    <!-- Bastion towers -->
+    <rect x="-135" y="-50" width="25" height="25" fill="#2d3748" stroke="#cbd5e0" stroke-width="1.5" rx="2"/>
+    <rect x="110" y="-50" width="25" height="25" fill="#2d3748" stroke="#cbd5e0" stroke-width="1.5" rx="2"/>
+    <rect x="-150" y="25" width="25" height="25" fill="#2d3748" stroke="#cbd5e0" stroke-width="1.5" rx="2"/>
+    <rect x="125" y="25" width="25" height="25" fill="#2d3748" stroke="#cbd5e0" stroke-width="1.5" rx="2"/>
+    <!-- Inner keep -->
+    <rect x="-60" y="-20" width="120" height="40" fill="#1a202c" stroke="#d4af37" stroke-width="1.5" rx="3"/>
+    <text x="0" y="4" text-anchor="middle" class="tactical-text" fill="#ffd700" style="font-size: 13px;">NAVSARI CITADEL</text>
+    <text x="0" y="20" text-anchor="middle" class="tactical-text" fill="#a0aec0" style="font-size: 9px;">HEADQUARTERS OF AVANIJANASHRAYA PULAKESHIN</text>
+  </g>
+
+  <!-- 7. Northern Approaches (Where Tajika army marshals) -->
+  <rect x="540" y="60" width="420" height="70" fill="#1c2026" stroke="#4a5568" stroke-width="1" stroke-dasharray="4 4" rx="4"/>
+  <text x="750" y="95" text-anchor="middle" class="topo-text" fill="#a0aec0">NORTHERN ALLUVIAL APPROACHES (FROM BHARUCH &amp; TAPI)</text>
+  <text x="750" y="115" text-anchor="middle" class="tactical-text" fill="#e07a6e" style="font-size: 10px;">DEPLOYMENT AXIS OF UMAYYAD TAJIKA ARMY (~45,000)</text>
+
+  <!-- 8. Battlefield Sector Orientation & Scale Compass -->
+  <g transform="translate(1480, 100)">
+    <circle cx="0" cy="0" r="38" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="34" fill="none" stroke="#2d3748" stroke-width="1" stroke-dasharray="2 4"/>
+    <polygon points="0,-32 5,-8 0,-13 -5,-8" fill="#d4af37"/>
+    <polygon points="0,32 5,8 0,13 -5,8" fill="#718096"/>
+    <polygon points="-32,0 -8,5 -13,0 -8,-5" fill="#718096"/>
+    <polygon points="32,0 8,5 13,0 8,-5" fill="#718096"/>
+    <circle cx="0" cy="0" r="3" fill="#e2e8f0"/>
+    <text x="0" y="-38" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#d4af37">N</text>
+  </g>
+
+  <!-- Grid references / scale bar -->
+  <g transform="translate(1320, 850)">
+    <rect x="0" y="0" width="200" height="6" fill="#2d3748" rx="2"/>
+    <rect x="0" y="0" width="100" height="6" fill="#d4af37" rx="2"/>
+    <text x="0" y="-6" class="tactical-text" style="font-size: 10px; fill: #a0aec0;">0</text>
+    <text x="100" y="-6" class="tactical-text" style="font-size: 10px; fill: #a0aec0;">1.5 km</text>
+    <text x="200" y="-6" class="tactical-text" style="font-size: 10px; fill: #a0aec0;">3.0 km</text>
+    <text x="100" y="20" text-anchor="middle" class="tactical-text" style="font-size: 10px; fill: #cbd5e0;">TACTICAL BATTLEFIELD SCALE</text>
+  </g>
+</svg>
