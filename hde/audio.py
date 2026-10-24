@@ -30,19 +30,19 @@ def prepare_audio(doc: Documentary, duration_s: float, silence: bool, cache_dir:
     """Build a WAV that is exactly `duration_s` long."""
     require_ffmpeg()
     cache_dir.mkdir(parents=True, exist_ok=True)
-    if silence:
-        mode, badge, description = "silence", "CAPTIONS ONLY", "silence"
-    elif doc.audio_file is not None:
+    if doc.audio_file is not None:
         mode, badge, description = "file", None, f"file {doc.audio_file}"
+    elif silence:
+        mode, badge, description = "silence", None, "silence"
     else:
         mode, badge, description = "voice", "PLACEHOLDER VOICE", f"flite voice {doc.voice}"
     dest = cache_dir / f"{doc.id}-{mode}-{duration_s:.3f}.wav"
     if _reusable(dest, duration_s):
         return AudioTrack(dest, badge, description)
-    if silence:
-        _write_silence(dest, duration_s)
-    elif doc.audio_file is not None:
+    if doc.audio_file is not None:
         _fit_external(doc.audio_file, dest, duration_s)
+    elif silence:
+        _write_silence(dest, duration_s)
     else:
         scene_paths = [_scene_speech(doc, scene, cache_dir) for scene in doc.scenes]
         _concat(scene_paths, dest)

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Infantry</title>
+  <g fill="currentColor" stroke="#121614" stroke-width="2" paint-order="stroke fill">
+    <circle cx="28" cy="14" r="6"/>
+    <rect x="22" y="22" width="12" height="22" rx="2"/>
+    <rect x="40" y="10" width="3" height="40"/>
+    <polygon points="38,8 48,14 38,18"/>
+  </g>
+</svg>

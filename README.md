@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Animateskill
 
 Skills for AI coding agents that animate silent, subtitled military history.
@@ -54,6 +53,3 @@ Renderer setup and the exact commands are in [docs/renderer.md](docs/renderer.md
 ## What an agent produces
 
 A scene plan, an original or user-supplied map, circular commander portraits, army boxes that both advance in the clash, burned subtitles, and a validated silent MP4. The report names the file only after validation prints `result: OK`.
-=======
-# Animateskill
->>>>>>> origin/main

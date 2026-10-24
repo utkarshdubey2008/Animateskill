@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Banner</title>
+  <g fill="currentColor" stroke="#121614" stroke-width="2" paint-order="stroke fill">
+    <rect x="16" y="8" width="4" height="48"/>
+    <polygon points="20,10 50,18 20,30"/>
+  </g>
+</svg>

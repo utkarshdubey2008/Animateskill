@@ -36,7 +36,8 @@ Use after the map plate exists, and before commander circles are placed.
 5. Leave a force that does not fight off the axis, with no motion keys.
 6. In the clash scene, give both fighting armies `motions` from `docs/scene-contract.md`. Start at the camp side, end still at least 0.06 short of the other box. Confidence `illustrative`. The trail label is `Illustrative advance`.
 7. Later scenes start those armies where the clash left them.
-8. Implement box drawing, symbol drawing, and motions in `hde/` if the loader still rejects the fields. Dots and a single arrow are not a substitute for two moving boxes.
+8. Implement box drawing, symbol drawing, and motions in `hde/` if the loader still rejects the fields. Dots and arrows are not a substitute for moving boxes: never use directional movement arrows on screen for advancing troops. Show movement exclusively through moving formation boxes (`motions`) with dashed advance trails.
+9. Historical period flags (`assets/flags/<side>.png`) are mounted on white/silver flagstaffs above army formation boxes.
 
 ## Checks
 

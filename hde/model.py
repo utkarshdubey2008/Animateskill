@@ -43,6 +43,26 @@ class MarkerKey:
 
 
 @dataclass
+class MotionKey:
+    t: float
+    x: float
+    y: float
+
+
+@dataclass
+class Motion:
+    confidence: str
+    keys: list[MotionKey]
+
+
+@dataclass
+class TerritoryLayer:
+    id: str
+    t: float
+    fill: str
+
+
+@dataclass
 class MarkerDef:
     id: str
     label: str
@@ -52,6 +72,11 @@ class MarkerDef:
     x: float
     y: float
     anchor: str
+    role: str | None = None
+    image: Path | None = None
+    symbol: list[str] = field(default_factory=list)
+    attach: str | None = None
+    offset: tuple[float, float] | None = None
 
 
 @dataclass
@@ -101,6 +126,8 @@ class Scene:
     arrows: list[Arrow]
     effects: list[Effect]
     cards: list[Card]
+    motions: dict[str, Motion] = field(default_factory=dict)
+    layers: list[TerritoryLayer] = field(default_factory=list)
 
 
 @dataclass
@@ -306,6 +333,8 @@ def _scenes(value: object, markers: dict[str, MarkerDef], where: str) -> list[Sc
                 "arrows",
                 "effects",
                 "overlays",
+                "motions",
+                "layers",
             },
             spot,
         )
@@ -342,6 +371,8 @@ def _scenes(value: object, markers: dict[str, MarkerDef], where: str) -> list[Sc
                 arrows=_arrows(item.get("arrows", []), f"{spot}.arrows"),
                 effects=_effects(item.get("effects", []), markers, f"{spot}.effects"),
                 cards=_cards(item.get("overlays", []), f"{spot}.overlays"),
+                motions=_motions(item.get("motions"), markers, f"{spot}.motions"),
+                layers=_layers(item.get("layers"), f"{spot}.layers"),
             )
         )
     return scenes
@@ -505,6 +536,58 @@ def _cards(value: object, where: str) -> list[Card]:
     return cards
 
 
+def _motions(value: object, markers: dict[str, MarkerDef], where: str) -> dict[str, Motion]:
+    if value is None:
+        return {}
+    if not isinstance(value, dict):
+        raise ValueError(f"{where} must be an object")
+    result: dict[str, Motion] = {}
+    for marker_id, motion_obj in value.items():
+        spot = f"{where}.{marker_id}"
+        if marker_id not in markers:
+            raise ValueError(f"{spot}: unknown marker {marker_id}")
+        if not isinstance(motion_obj, dict):
+            raise ValueError(f"{spot} must be an object")
+        _reject_unknown(motion_obj, {"confidence", "keys"}, spot)
+        conf = _string(motion_obj, "confidence", spot)
+        if conf not in ARROW_CONFIDENCE:
+            raise ValueError(f"{spot}.confidence must be one of {sorted(ARROW_CONFIDENCE)}")
+        raw_keys = motion_obj.get("keys")
+        if not isinstance(raw_keys, list) or not raw_keys:
+            raise ValueError(f"{spot}.keys must be a non-empty list")
+        keys: list[MotionKey] = []
+        for k_idx, k_item in enumerate(raw_keys):
+            k_spot = f"{spot}.keys[{k_idx}]"
+            if not isinstance(k_item, dict):
+                raise ValueError(f"{k_spot} must be an object")
+            _reject_unknown(k_item, {"t", "x", "y"}, k_spot)
+            t = _as_unit(_number(k_item, "t", k_spot), f"{k_spot}.t")
+            x = _as_unit(_number(k_item, "x", k_spot), f"{k_spot}.x")
+            y = _as_unit(_number(k_item, "y", k_spot), f"{k_spot}.y")
+            keys.append(MotionKey(t=t, x=x, y=y))
+        keys.sort(key=lambda k: k.t)
+        result[marker_id] = Motion(confidence=conf, keys=keys)
+    return result
+
+
+def _layers(value: object, where: str) -> list[TerritoryLayer]:
+    if value is None:
+        return []
+    if not isinstance(value, list):
+        raise ValueError(f"{where} must be a list")
+    layers: list[TerritoryLayer] = []
+    for index, item in enumerate(value):
+        spot = f"{where}[{index}]"
+        if not isinstance(item, dict):
+            raise ValueError(f"{spot} must be an object")
+        _reject_unknown(item, {"id", "t", "fill"}, spot)
+        lid = _string(item, "id", spot)
+        t = _as_unit(_number(item, "t", spot), f"{spot}.t")
+        fill = _string(item, "fill", spot)
+        layers.append(TerritoryLayer(id=lid, t=t, fill=fill))
+    return layers
+
+
 def _markers(value: dict, palette: dict[str, tuple[int, int, int]], where: str) -> dict[str, MarkerDef]:
     markers: dict[str, MarkerDef] = {}
     for marker_id, item in value.items():
@@ -513,7 +596,21 @@ def _markers(value: dict, palette: dict[str, tuple[int, int, int]], where: str) 
             raise ValueError(f"{spot} must be an object")
         _reject_unknown(
             item,
-            {"label", "detail", "side", "confidence", "x", "y", "anchor"},
+            {
+                "label",
+                "detail",
+                "side",
+                "confidence",
+                "x",
+                "y",
+                "anchor",
+                "role",
+                "image",
+                "symbol",
+                "symbols",
+                "attach",
+                "offset",
+            },
             spot,
         )
         side = _string(item, "side", spot)
@@ -527,15 +624,54 @@ def _markers(value: dict, palette: dict[str, tuple[int, int, int]], where: str) 
             raise ValueError(f"{spot}.anchor must be one of {sorted(ANCHORS)}")
         x = _as_unit(_number(item, "x", spot), f"{spot}.x")
         y = _as_unit(_number(item, "y", spot), f"{spot}.y")
+        role = item.get("role")
+        if role is not None and role not in {"person", "army"}:
+            raise ValueError(f"{spot}.role must be 'person' or 'army'")
+        image_val = item.get("image")
+        image_path: Path | None = None
+        if image_val is not None:
+            if not isinstance(image_val, str):
+                raise ValueError(f"{spot}.image must be a string path or null")
+            image_path = _resolve(image_val)
+        symbols: list[str] = []
+        sym_val = item.get("symbol") if "symbol" in item else item.get("symbols")
+        if sym_val is not None:
+            if isinstance(sym_val, str):
+                symbols = [sym_val]
+            elif isinstance(sym_val, list) and all(isinstance(s, str) for s in sym_val):
+                symbols = list(sym_val)
+            else:
+                raise ValueError(f"{spot}.symbol must be a string or list of strings")
+            valid_syms = {"infantry", "cavalry", "archer", "chariot", "elephant"}
+            for s in symbols:
+                if s not in valid_syms:
+                    raise ValueError(f"{spot}.symbol contains invalid symbol '{s}'")
+        attach = item.get("attach")
+        if attach is not None and not isinstance(attach, str):
+            raise ValueError(f"{spot}.attach must be a string marker id")
+        offset_val = item.get("offset")
+        offset: tuple[float, float] | None = None
+        if offset_val is not None:
+            if not isinstance(offset_val, (list, tuple)) or len(offset_val) != 2:
+                raise ValueError(f"{spot}.offset must be a [dx, dy] list")
+            offset = (_as_number(offset_val[0], f"{spot}.offset[0]"), _as_number(offset_val[1], f"{spot}.offset[1]"))
+        detail_val = item.get("detail", "")
+        if not isinstance(detail_val, str):
+            raise ValueError(f"{spot}.detail must be a string")
         markers[marker_id] = MarkerDef(
             id=marker_id,
             label=_string(item, "label", spot),
-            detail=_string(item, "detail", spot),
+            detail=detail_val,
             side=side,
             confidence=confidence,
             x=x,
             y=y,
             anchor=anchor,
+            role=role,
+            image=image_path,
+            symbol=symbols,
+            attach=attach,
+            offset=offset,
         )
     if not markers:
         raise ValueError(f"{where} must define at least one marker")

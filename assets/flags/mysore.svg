@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="32" viewBox="0 0 60 40">
+  <!-- Emerald Green Field of the Khudadad State -->
+  <rect width="60" height="40" fill="#085c2c" stroke="#11161d" stroke-width="1.5"/>
+  <!-- Golden Border -->
+  <rect x="2" y="2" width="56" height="36" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+  <!-- Golden Radiant Sun and Crescent -->
+  <circle cx="30" cy="20" r="6" fill="#f5c518"/>
+  <!-- Sun Rays -->
+  <line x1="30" y1="10" x2="30" y2="13" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+  <line x1="30" y1="27" x2="30" y2="30" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="20" x2="23" y2="20" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+  <line x1="37" y1="20" x2="40" y2="20" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+  <line x1="23" y1="13" x2="25" y2="15" stroke="#f5c518" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="37" y1="27" x2="35" y2="25" stroke="#f5c518" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="37" y1="13" x2="35" y2="15" stroke="#f5c518" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="23" y1="27" x2="25" y2="25" stroke="#f5c518" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Crescent Moon -->
+  <path d="M 26 15 A 6 6 0 0 0 26 25 A 5 5 0 0 1 26 15 Z" fill="#f5c518"/>
+  <!-- Stylized Tiger Bubri Stripes in corners -->
+  <path d="M 6 8 Q 10 10 8 14 Q 6 12 6 8 Z" fill="#d4af37"/>
+  <path d="M 54 8 Q 50 10 52 14 Q 54 12 54 8 Z" fill="#d4af37"/>
+  <path d="M 6 32 Q 10 30 8 26 Q 6 28 6 32 Z" fill="#d4af37"/>
+  <path d="M 54 32 Q 50 30 52 26 Q 54 28 54 32 Z" fill="#d4af37"/>
+</svg>

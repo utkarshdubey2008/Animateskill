@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <title>Circular ruler</title>
+  <desc>Compass ring for a schematic map. North is the marked arm. This is not a measured scale and not a survey.</desc>
+  <g fill="none" stroke="#e6dcc8" stroke-width="2">
+    <circle cx="100" cy="100" r="78"/>
+    <circle cx="100" cy="100" r="62"/>
+    <path d="M100 22 V40 M100 160 V178 M22 100 H40 M160 100 H178" stroke-width="3"/>
+    <path d="M45 45 L58 58 M155 45 L142 58 M45 155 L58 142 M155 155 L142 142" opacity="0.7"/>
+  </g>
+  <g fill="#e6dcc8" font-family="Liberation Sans, DejaVu Sans, sans-serif" font-size="16" text-anchor="middle">
+    <text x="100" y="18">N</text>
+    <text x="188" y="105">E</text>
+    <text x="100" y="194">S</text>
+    <text x="14" y="105">W</text>
+  </g>
+  <polygon points="100,48 106,72 100,66 94,72" fill="#e6dcc8"/>
+</svg>

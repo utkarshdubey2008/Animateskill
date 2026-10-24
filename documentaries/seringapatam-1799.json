@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "id": "seringapatam-1799",
+  "title": "Fall of Seringapatam & Death of Tipu Sultan",
+  "date_label": "4 May 1799",
+  "location_label": "Seringapatam, Mysore",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "duration_s": 60,
+  "disclaimer": "Schematic, not a survey. Tactical positions diagrammatic based on contemporary British and Mysorean accounts.",
+  "legend": [
+    {"swatch": "solid", "text": "Attested landmark / force"},
+    {"swatch": "hollow", "text": "Approximate battery position"},
+    {"swatch": "dashed", "text": "Illustrative movement"}
+  ],
+  "palette": {
+    "british": "#d4af37",
+    "mysore": "#e07a6e",
+    "neutral": "#9aa6b2"
+  },
+  "map": {
+    "svg": "assets/maps/seringapatam.svg",
+    "attribution": "Original schematic drawn for this project. North is up. Uncolored tactical plate. The Cauvery channels and fortress walls are diagrammatic. Do not replace this plate with a scanned or traced published map."
+  },
+  "narration": {
+    "voice": "en-US-ChristopherNeural",
+    "audio_file": "assets/audio/seringapatam_narration.wav"
+  },
+  "markers": {
+    "harris": {
+      "role": "person",
+      "image": "assets/portraits/harris_circle.png",
+      "label": "Gen. George Harris",
+      "detail": "commander-in-chief",
+      "side": "british",
+      "confidence": "attested_area",
+      "x": 0.14,
+      "y": 0.42,
+      "anchor": "w",
+      "attach": "british_army",
+      "offset": [-0.035, -0.035]
+    },
+    "tipu": {
+      "role": "person",
+      "image": "assets/portraits/tipu_circle.png",
+      "label": "Tipu Sultan",
+      "detail": "Tiger of Mysore",
+      "side": "mysore",
+      "confidence": "attested_area",
+      "x": 0.44,
+      "y": 0.44,
+      "anchor": "n",
+      "attach": "mysore_garrison",
+      "offset": [0.035, -0.035]
+    },
+    "british_army": {
+      "role": "army",
+      "label": "British-Allied Force",
+      "detail": "",
+      "side": "british",
+      "confidence": "attested_area",
+      "symbol": ["infantry", "cavalry"],
+      "x": 0.14,
+      "y": 0.46,
+      "anchor": "s"
+    },
+    "mysore_garrison": {
+      "role": "army",
+      "label": "Mysore Defenders",
+      "detail": "",
+      "side": "mysore",
+      "confidence": "attested_area",
+      "symbol": ["infantry", "cavalry"],
+      "x": 0.44,
+      "y": 0.48,
+      "anchor": "s"
+    },
+    "breaching_batteries": {
+      "label": "Breaching Batteries",
+      "detail": "heavy siege guns",
+      "side": "british",
+      "confidence": "attested_area",
+      "x": 0.18,
+      "y": 0.46,
+      "anchor": "n"
+    },
+    "the_breach": {
+      "label": "The Breach",
+      "detail": "northwest rampart",
+      "side": "neutral",
+      "confidence": "attested_area",
+      "x": 0.295,
+      "y": 0.47,
+      "anchor": "e"
+    },
+    "water_gate": {
+      "label": "Water Gate",
+      "detail": "northern gateway",
+      "side": "neutral",
+      "confidence": "attested_area",
+      "x": 0.405,
+      "y": 0.355,
+      "anchor": "e"
+    }
+  },
+  "scenes": [
+    {
+      "id": "convergence",
+      "title": "The Siege Lines Convene",
+      "start_s": 0,
+      "end_s": 12,
+      "narration": "In April 1799, British and allied forces under General George Harris converged on the island fortress of Seringapatam, the stronghold of Tipu Sultan, Ruler of Mysore.",
+      "speech": "In April 1799, British and allied forces under General George Harris converged on the island fortress of Seringapatam, the stronghold of Tipu Sultan, Ruler of Mysore.",
+      "transition_in": "fade",
+      "transition_s": 0.6,
+      "camera": {
+        "start": {"cx": 0.36, "cy": 0.46, "zoom": 0.65},
+        "end": {"cx": 0.36, "cy": 0.46, "zoom": 0.65}
+      },
+      "show": ["harris", "tipu", "british_army", "mysore_garrison", "breaching_batteries", "the_breach", "water_gate"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "overlays": []
+    },
+    {
+      "id": "bombardment",
+      "title": "Breaching the Western Rampart",
+      "start_s": 12,
+      "end_s": 24,
+      "narration": "British siege batteries opened heavy fire on the western ramparts across the Cauvery River. By early May, artillery had battered a practicable breach in the fortress wall.",
+      "speech": "British siege batteries opened heavy fire on the western ramparts across the Cauvery River. By early May, artillery had battered a practicable breach in the fortress wall.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.36, "cy": 0.46, "zoom": 0.65},
+        "end": {"cx": 0.36, "cy": 0.46, "zoom": 0.65}
+      },
+      "show": ["harris", "tipu", "british_army", "mysore_garrison", "breaching_batteries", "the_breach", "water_gate"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [
+        {
+          "type": "artillery",
+          "marker": "breaching_batteries",
+          "t0": 0.05,
+          "t1": 0.95,
+          "intensity": 0.95
+        },
+        {
+          "type": "artillery",
+          "marker": "the_breach",
+          "t0": 0.08,
+          "t1": 0.98,
+          "intensity": 1.0
+        }
+      ],
+      "overlays": []
+    },
+    {
+      "id": "the-assault",
+      "title": "Storming the Breach",
+      "start_s": 24,
+      "end_s": 36,
+      "narration": "At one o'clock on May fourth, Major General David Baird led the assault columns across the rocky riverbed under fire, rushing up the rubble into the breach.",
+      "speech": "At one o'clock on May fourth, Major General David Baird led the assault columns across the rocky riverbed under fire, rushing up the rubble into the breach.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.36, "cy": 0.46, "zoom": 0.65},
+        "end": {"cx": 0.36, "cy": 0.46, "zoom": 0.65}
+      },
+      "show": ["harris", "tipu", "british_army", "mysore_garrison", "the_breach", "water_gate"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [
+        {
+          "type": "artillery",
+          "marker": "the_breach",
+          "t0": 0.02,
+          "t1": 0.45,
+          "intensity": 0.75
+        }
+      ],
+      "motions": {
+        "british_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.12, "x": 0.14, "y": 0.46},
+            {"t": 0.82, "x": 0.28, "y": 0.47}
+          ]
+        },
+        "mysore_garrison": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.12, "x": 0.44, "y": 0.48},
+            {"t": 0.82, "x": 0.35, "y": 0.47}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "tipu-killed",
+      "title": "Last Stand at the Water Gate",
+      "start_s": 36,
+      "end_s": 48,
+      "narration": "Tipu Sultan fought fiercely in the melee near the northern rampart. Trapped under the low archway of the Water Gate, the Tiger of Mysore was shot and killed in action.",
+      "speech": "Tipu Sultan fought fiercely in the melee near the northern rampart. Trapped under the low archway of the Water Gate, the Tiger of Mysore was shot and killed in action.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.36, "cy": 0.46, "zoom": 0.65},
+        "end": {"cx": 0.36, "cy": 0.46, "zoom": 0.65}
+      },
+      "show": ["harris", "tipu", "british_army", "mysore_garrison", "the_breach", "water_gate"],
+      "overrides": {
+        "tipu": {
+          "keys": [
+            {"t": 0.45, "mark": "killed", "detail": "killed in action"}
+          ]
+        },
+        "mysore_garrison": {
+          "keys": [
+            {"t": 0.0, "alpha": 1.0},
+            {"t": 0.50, "alpha": 0.0}
+          ]
+        }
+      },
+      "arrows": [],
+      "effects": [],
+      "motions": {
+        "british_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.00, "x": 0.28, "y": 0.47},
+            {"t": 0.75, "x": 0.35, "y": 0.38}
+          ]
+        },
+        "mysore_garrison": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.00, "x": 0.35, "y": 0.47},
+            {"t": 0.75, "x": 0.41, "y": 0.36}
+          ]
+        }
+      },
+      "overlays": []
+    },
+    {
+      "id": "aftermath",
+      "title": "The Fall of Mysore",
+      "start_s": 48,
+      "end_s": 60,
+      "narration": "With Tipu Sultan killed, Seringapatam fell to the British. Tipu's body was recovered beneath a mound of the fallen, ending four decades of Mysorean resistance to British rule.",
+      "speech": "With Tipu Sultan killed, Seringapatam fell to the British. Tipu's body was recovered beneath a mound of the fallen, ending four decades of Mysorean resistance to British rule.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.36, "cy": 0.46, "zoom": 0.65},
+        "end": {"cx": 0.36, "cy": 0.46, "zoom": 0.65}
+      },
+      "show": ["harris", "tipu", "british_army", "the_breach", "water_gate"],
+      "overrides": {
+        "tipu": {
+          "keys": [
+            {"t": 0.0, "mark": "killed", "detail": "killed in action"}
+          ]
+        }
+      },
+      "arrows": [],
+      "effects": [],
+      "motions": {
+        "british_army": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.35, "y": 0.38},
+            {"t": 1.0, "x": 0.35, "y": 0.38}
+          ]
+        }
+      },
+      "overlays": [
+        {
+          "type": "card",
+          "t0": 0.15,
+          "t1": 0.98,
+          "accent": 0,
+          "lines": [
+            "FALL OF SERINGAPATAM",
+            "4 May 1799",
+            "Tipu Sultan killed at the Water Gate",
+            "British hegemony established across Southern India"
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "siege-accounts",
+      "text": "Alexander Beatson's contemporary account (1800) records the march of General Harris from Vellore, the establishment of siege lines across the Cauvery, and the breaching of the western rampart on 3-4 May 1799.",
+      "refs": [
+        "Beatson, Alexander, A View of the Origin and Conduct of the War with Tippoo Sultaun (London, 1800)",
+        "Wellesley, Richard, Despatches, Minutes and Correspondence (1836)"
+      ]
+    },
+    {
+      "id": "breach-and-assault",
+      "text": "Major General David Baird led the assault columns across the riverbed at 1:00 PM on 4 May. The assault crossed the low-water rocky channel and secured the western breach in under twenty minutes before advancing along the northern and southern ramparts.",
+      "refs": [
+        "Hook, Theodore, The Life of General, the Right Honourable Sir David Baird (1832)",
+        "Wilks, Mark, Historical Sketches of the South of India (1817)"
+      ]
+    },
+    {
+      "id": "tipus-death",
+      "text": "Tipu Sultan personally engaged the advancing British columns near the northern rampart and retreated toward the Water Gate (Holey Gateway). Wounded and trapped under the low archway, he was shot dead by a British soldier attempting to take his jeweled belt.",
+      "refs": [
+        "Bowring, Lewin B., Haidar Ali and Tipu Sultan and the Struggle with the Musalman Powers of the South (1893)",
+        "Encyclopaedia Britannica, Siege of Seringapatam"
+      ]
+    }
+  ]
+}

@@ -3,15 +3,21 @@
 from __future__ import annotations
 
 import functools
+import hashlib
 import math
 import random
-from dataclasses import dataclass
+import re
+import subprocess
+from dataclasses import dataclass, field
+from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 from hde.fonts import FontPaths
 from hde.geom import camera_window, crop_box, lerp, project, pulse, smoothstep
 from hde.model import Documentary, MarkerDef, MarkerKey, Scene
+
+ROOT = Path(__file__).resolve().parent.parent
 
 PAPER = (243, 239, 228)
 MUTED = (196, 188, 170)
@@ -31,6 +37,7 @@ class FrameContext:
     black: Image.Image
     storm: Image.Image
     badge: str | None
+    layer_cache: dict[str, Image.Image] = field(default_factory=dict)
 
 
 def make_scrim(width: int, height: int) -> Image.Image:
@@ -54,15 +61,45 @@ def make_scrim(width: int, height: int) -> Image.Image:
     return image
 
 
+def _get_scene_base(ctx: FrameContext, scene: Scene, t: float) -> Image.Image:
+    if not scene.layers:
+        return ctx.base
+    active = tuple(sorted((l.id, l.fill) for l in scene.layers if t >= l.t))
+    if not active:
+        return ctx.base
+    key = str(active)
+    if key in ctx.layer_cache:
+        return ctx.layer_cache[key]
+    svg_text = ctx.doc.map_svg.read_text(encoding="utf-8")
+    for lid, fill in active:
+        pattern = re.compile(rf'(<path[^>]*id=["\']{re.escape(lid)}["\'][^>]*?)fill=["\'][^"\']*["\']', re.IGNORECASE)
+        svg_text = pattern.sub(rf'\1fill="{fill}"', svg_text)
+    cache_dir = ctx.doc.root / "output" / "cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    h = hashlib.md5(key.encode("utf-8")).hexdigest()[:8]
+    temp_svg = cache_dir / f"{ctx.doc.id}_layers_{h}.svg"
+    temp_png = cache_dir / f"{ctx.doc.id}_layers_{h}_{ctx.base.width}x{ctx.base.height}.png"
+    if not temp_png.is_file():
+        temp_svg.write_text(svg_text, encoding="utf-8")
+        subprocess.run(
+            ["rsvg-convert", "-w", str(ctx.base.width), "-h", str(ctx.base.height), "-o", str(temp_png), str(temp_svg)],
+            check=True,
+        )
+    img = Image.open(temp_png).convert("RGB")
+    ctx.layer_cache[key] = img
+    return img
+
+
 def compose_scene(ctx: FrameContext, scene: Scene, t: float, frame_index: int) -> Image.Image:
     eased = smoothstep(t)
     camera_x = lerp(scene.camera_start.cx, scene.camera_end.cx, eased)
     camera_y = lerp(scene.camera_start.cy, scene.camera_end.cy, eased)
     zoom = lerp(scene.camera_start.zoom, scene.camera_end.zoom, eased)
-    map_w, map_h = ctx.base.size
+    base = _get_scene_base(ctx, scene, t)
+    map_w, map_h = base.size
     window = camera_window(camera_x, camera_y, zoom, map_w, map_h, ctx.width / ctx.height)
     box = crop_box(window, map_w, map_h)
-    crop = ctx.base.crop(box)
+    crop = base.crop(box)
     frame = crop.resize((ctx.width, ctx.height), Image.Resampling.BILINEAR)
 
     rain_amount = 0.0
@@ -81,8 +118,13 @@ def compose_scene(ctx: FrameContext, scene: Scene, t: float, frame_index: int) -
     for effect in scene.effects:
         if effect.type == "artillery":
             _draw_artillery(draw, ctx, effect, t, frame_index, box, map_w, map_h)
+    pos_memo: dict = {}
     for marker_id in scene.show:
-        _draw_marker(draw, ctx, scene, ctx.doc.markers[marker_id], t, box, map_w, map_h)
+        if marker_id in ctx.doc.markers:
+            _draw_motion_trail(draw, ctx, scene, ctx.doc.markers[marker_id], t, box, map_w, map_h, pos_memo)
+    for marker_id in scene.show:
+        if marker_id in ctx.doc.markers:
+            _draw_marker(draw, ctx, scene, ctx.doc.markers[marker_id], t, box, map_w, map_h, pos_memo)
     frame.paste(overlay, (0, 0), overlay)
     del overlay
 
@@ -136,57 +178,232 @@ def _draw_arrow(draw, ctx: FrameContext, scene: Scene, arrow, t: float, box, map
 
 def _draw_artillery(draw, ctx, effect, t, frame_index, box, map_w, map_h) -> None:
     amount = pulse(t, effect.t0, effect.t1, 0.04)
-    if amount <= 0 or frame_index % 8 > 2:
+    if amount <= 0 or frame_index % 6 > 3:
         return
     marker = ctx.doc.markers[effect.marker]
     sx, sy = project(marker.x, marker.y, box, ctx.width, ctx.height, map_w, map_h)
     scale = ctx.height / 720
-    phase = frame_index % 8
-    radius = max(4, int((8 + phase * 3) * scale))
-    jitter = ((frame_index * 17) % 11) - 5
-    color = ctx.doc.palette[marker.side]
-    alpha = int(170 * amount)
+    phase = frame_index % 6
+    jitter_x = ((frame_index * 23) % 15) - 7
+    jitter_y = ((frame_index * 19) % 11) - 5
+    cx, cy = sx + jitter_x, sy + jitter_y
+
+    # Outer fiery blast shockwave
+    outer_r = max(8, int((16 + phase * 6) * scale))
     draw.ellipse(
-        [sx - radius + jitter, sy - radius, sx + radius + jitter, sy + radius],
-        fill=(*color, alpha),
+        [cx - outer_r, cy - outer_r, cx + outer_r, cy + outer_r],
+        fill=(235, 110, 30, int(120 * amount)),
+        outline=(255, 180, 50, int(180 * amount)),
+        width=max(1, int(2 * scale)),
     )
-    inner = max(2, radius // 2)
+    # Mid explosive fireball
+    mid_r = max(5, int((9 + phase * 3) * scale))
     draw.ellipse(
-        [sx - inner, sy - inner, sx + inner, sy + inner],
-        fill=(255, 244, 220, int(210 * amount)),
+        [cx - mid_r, cy - mid_r, cx + mid_r, cy + mid_r],
+        fill=(255, 185, 45, int(190 * amount)),
+    )
+    # Inner blinding core
+    inner_r = max(2, int((4 + phase * 1.5) * scale))
+    draw.ellipse(
+        [cx - inner_r, cy - inner_r, cx + inner_r, cy + inner_r],
+        fill=(255, 255, 240, int(240 * amount)),
     )
 
 
-def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_w, map_h) -> None:
+def _marker_pos(marker: MarkerDef, doc: Documentary, scene: Scene, t: float, memo: dict) -> tuple[float, float]:
+    if marker.id in memo:
+        return memo[marker.id]
+    if marker.id in scene.motions:
+        motion = scene.motions[marker.id]
+        keys = motion.keys
+        if t <= keys[0].t:
+            pos = (keys[0].x, keys[0].y)
+        elif t >= keys[-1].t:
+            pos = (keys[-1].x, keys[-1].y)
+        else:
+            pos = (keys[-1].x, keys[-1].y)
+            for k0, k1 in zip(keys, keys[1:]):
+                if k0.t <= t <= k1.t:
+                    span = k1.t - k0.t or 1.0
+                    prog = (t - k0.t) / span
+                    pos = (lerp(k0.x, k1.x, prog), lerp(k0.y, k1.y, prog))
+                    break
+    elif marker.attach and marker.attach in doc.markers:
+        parent_pos = _marker_pos(doc.markers[marker.attach], doc, scene, t, memo)
+        off_x, off_y = marker.offset if marker.offset else (0.0, 0.0)
+        pos = (parent_pos[0] + off_x, parent_pos[1] + off_y)
+    else:
+        pos = (marker.x, marker.y)
+    memo[marker.id] = pos
+    return pos
+
+
+def _draw_motion_trail(draw, ctx: FrameContext, scene: Scene, marker: MarkerDef, t: float, box, map_w: int, map_h: int, memo: dict) -> None:
+    if marker.id not in scene.motions:
+        return
+    motion = scene.motions[marker.id]
+    if not motion.keys or t <= motion.keys[0].t:
+        return
+    k0 = motion.keys[0]
+    cur_x, cur_y = _marker_pos(marker, ctx.doc, scene, t, memo)
+    sx0, sy0 = project(k0.x, k0.y, box, ctx.width, ctx.height, map_w, map_h)
+    cur_sx, cur_sy = project(cur_x, cur_y, box, ctx.width, ctx.height, map_w, map_h)
+    scale = ctx.height / 720
+    color = (232, 220, 190, 200)
+    width = max(2, int(round(2.5 * scale)))
+    _dashed_line(draw, sx0, sy0, cur_sx, cur_sy, color, width, max(6, int(10 * scale)), max(4, int(6 * scale)))
+    mid_x, mid_y = (sx0 + cur_sx) / 2, (sy0 + cur_sy) / 2
+    font = _font(ctx.fonts.sans, _px(12, ctx.height))
+    _label_box(draw, mid_x, mid_y - 14 * scale, ["Illustrative advance"], font, None, PAPER, "center", int(255 * 0.9))
+
+
+@functools.lru_cache(maxsize=32)
+def _load_unit_icon(symbol_name: str, color_hex: str, size: int) -> Image.Image:
+    svg_path = ROOT / "skills" / "army-symbols" / "assets" / f"{symbol_name}.svg"
+    if not svg_path.is_file():
+        img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        d = ImageDraw.Draw(img)
+        d.rectangle([2, 2, size - 3, size - 3], fill=(220, 220, 220, 220))
+        return img
+    svg_text = svg_path.read_text(encoding="utf-8").replace("currentColor", color_hex)
+    cache_dir = ROOT / "output" / "cache" / "symbols"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    clean_hex = color_hex.lstrip("#")
+    temp_svg = cache_dir / f"{symbol_name}_{clean_hex}.svg"
+    temp_png = cache_dir / f"{symbol_name}_{clean_hex}_{size}.png"
+    if not temp_png.is_file():
+        temp_svg.write_text(svg_text, encoding="utf-8")
+        subprocess.run(
+            ["rsvg-convert", "-w", str(size), "-h", str(size), "-o", str(temp_png), str(temp_svg)],
+            check=True,
+        )
+    return Image.open(temp_png).convert("RGBA")
+
+
+@functools.lru_cache(maxsize=16)
+def _load_portrait_image(image_path: str, size: int) -> Image.Image:
+    img = Image.open(image_path).convert("RGBA")
+    return img.resize((size, size), Image.Resampling.LANCZOS)
+
+
+@functools.lru_cache(maxsize=16)
+def _load_flag_image(side: str, w: int, h: int) -> Image.Image | None:
+    flag_path = ROOT / "assets" / "flags" / f"{side.lower()}.png"
+    if not flag_path.is_file():
+        return None
+    img = Image.open(flag_path).convert("RGBA")
+    return img.resize((w, h), Image.Resampling.LANCZOS)
+
+
+def _draw_marker(draw, ctx, scene: Scene, marker: MarkerDef, t: float, box, map_w, map_h, pos_memo: dict | None = None) -> None:
     state = _marker_state(marker, scene.overrides.get(marker.id, []), t)
     if state["alpha"] <= 0.02:
         return
-    sx, sy = project(marker.x, marker.y, box, ctx.width, ctx.height, map_w, map_h)
-    if sx < -80 or sy < -80 or sx > ctx.width + 80 or sy > ctx.height + 80:
+    memo = pos_memo if pos_memo is not None else {}
+    mx, my = _marker_pos(marker, ctx.doc, scene, t, memo)
+    sx, sy = project(mx, my, box, ctx.width, ctx.height, map_w, map_h)
+    if sx < -100 or sy < -100 or sx > ctx.width + 100 or sy > ctx.height + 100:
         return
     scale = ctx.height / 720
-    radius = max(4, int(round(9 * scale)))
     alpha = int(255 * state["alpha"])
     color = ctx.doc.palette[marker.side]
-    if marker.confidence == "attested_area":
-        draw.ellipse(
-            [sx - radius, sy - radius, sx + radius, sy + radius],
-            fill=(*color, alpha),
-            outline=(20, 16, 12, alpha),
-            width=max(1, int(2 * scale)),
-        )
-    else:
+
+    if marker.role == "army":
+        box_w = max(44, int(round(64 * scale)))
+        box_h = max(36, int(round(48 * scale)))
+        half_w = box_w // 2
+        half_h = box_h // 2
+        rect = [sx - half_w, sy - half_h, sx + half_w, sy + half_h]
+        if marker.confidence == "attested_area":
+            draw.rectangle(
+                rect,
+                fill=(*color, int(alpha * 0.85)),
+                outline=(20, 16, 12, alpha),
+                width=max(1, int(2 * scale)),
+            )
+        else:
+            draw.rectangle(
+                rect,
+                fill=(*INK, int(200 * alpha / 255)),
+                outline=(*color, alpha),
+                width=max(2, int(3 * scale)),
+            )
+        # Unit symbols inside
+        if marker.symbol:
+            sym_count = len(marker.symbol)
+            icon_size = max(14, int(round(18 * scale)))
+            gap = max(2, int(round(3 * scale)))
+            total_icons_w = sym_count * icon_size + (sym_count - 1) * gap
+            start_x = sx - total_icons_w // 2
+            icon_y = sy - icon_size // 2
+            hex_color = f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
+            for s_idx, sym_name in enumerate(marker.symbol):
+                icon_img = _load_unit_icon(sym_name, hex_color, icon_size)
+                draw._image.paste(icon_img, (int(start_x + s_idx * (icon_size + gap)), int(icon_y)), icon_img)
+        # Historical Flag or Banner
+        flag_w = max(24, int(round(34 * scale)))
+        flag_h = max(16, int(round(22 * scale)))
+        flag_img = _load_flag_image(marker.side, flag_w, flag_h)
+        if flag_img is not None:
+            # Place flag attached neatly to the top edge of the box
+            flag_x = int(sx - half_w if marker.anchor == "w" else sx + half_w - flag_w)
+            flag_y = int(sy - half_h - flag_h - max(2, int(3 * scale)))
+            # Flagpole
+            pole_x = flag_x if marker.anchor == "w" else flag_x + flag_w - 1
+            draw.line([(pole_x, flag_y), (pole_x, sy - half_h)], fill=(225, 230, 235, alpha), width=max(1, int(2 * scale)))
+            draw._image.paste(flag_img, (flag_x, flag_y), flag_img)
+        else:
+            banner_size = max(14, int(round(18 * scale)))
+            hex_color = f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
+            banner_img = _load_unit_icon("banner", hex_color, banner_size)
+            if marker.anchor == "w" or "seleucid" in marker.side.lower() or "seleucid" in marker.id:
+                draw._image.paste(banner_img, (int(sx + half_w - banner_size // 2), int(sy - half_h - banner_size // 2)), banner_img)
+            else:
+                draw._image.paste(banner_img, (int(sx - half_w - banner_size // 2), int(sy - half_h - banner_size // 2)), banner_img)
+        radius = max(half_w, half_h)
+
+    elif marker.role == "person":
+        radius = max(18, int(round(26 * scale)))
+        if marker.image and Path(marker.image).is_file():
+            portrait = _load_portrait_image(str(marker.image), radius * 2)
+            draw._image.paste(portrait, (int(sx - radius), int(sy - radius)), portrait)
+        else:
+            draw.ellipse(
+                [sx - radius, sy - radius, sx + radius, sy + radius],
+                fill=(*INK, alpha),
+            )
+            initials = "".join(part[0] for part in marker.label.split()[:2]).upper()
+            init_font = _font(ctx.fonts.sans_bold, _px(14, ctx.height))
+            iw = draw.textlength(initials, font=init_font)
+            draw.text((sx - iw / 2, sy - _text_height(init_font) / 2), initials, font=init_font, fill=PAPER)
         draw.ellipse(
             [sx - radius, sy - radius, sx + radius, sy + radius],
             outline=(*color, alpha),
-            width=max(2, int(3 * scale)),
+            width=max(2, int(round(3.5 * scale))),
         )
+    else:
+        radius = max(4, int(round(9 * scale)))
+        if marker.confidence == "attested_area":
+            draw.ellipse(
+                [sx - radius, sy - radius, sx + radius, sy + radius],
+                fill=(*color, alpha),
+                outline=(20, 16, 12, alpha),
+                width=max(1, int(2 * scale)),
+            )
+        else:
+            draw.ellipse(
+                [sx - radius, sy - radius, sx + radius, sy + radius],
+                outline=(*color, alpha),
+                width=max(2, int(3 * scale)),
+            )
+
     if state["mark"] == "killed":
-        span = radius + max(3, int(4 * scale))
-        kill = (*PAPER, alpha)
-        width = max(2, int(2 * scale))
+        span = radius + max(4, int(6 * scale))
+        kill = (240, 60, 60, alpha) if marker.role == "person" else (*PAPER, alpha)
+        width = max(3, int(3.5 * scale))
         draw.line([(sx - span, sy - span), (sx + span, sy + span)], fill=kill, width=width)
         draw.line([(sx - span, sy + span), (sx + span, sy - span)], fill=kill, width=width)
+
     title_font = _font(ctx.fonts.sans_bold, _px(15, ctx.height))
     detail_font = _font(ctx.fonts.sans, _px(13, ctx.height))
     _place_marker_label(
@@ -237,12 +454,13 @@ def _alpha_at(keys: list[MarkerKey], t: float) -> float:
 
 def _place_marker_label(draw, ctx, sx, sy, radius, anchor, title, detail, title_font, detail_font, alpha) -> None:
     pad = max(3, int(4 * ctx.height / 720))
+    has_detail = bool(detail and detail.strip())
     title_w = draw.textlength(title, font=title_font)
-    detail_w = draw.textlength(detail, font=detail_font)
+    detail_w = draw.textlength(detail, font=detail_font) if has_detail else 0
     title_h = _text_height(title_font)
-    detail_h = _text_height(detail_font)
+    detail_h = _text_height(detail_font) if has_detail else 0
     box_w = int(max(title_w, detail_w) + pad * 2)
-    box_h = int(title_h + detail_h + pad * 2 + 1)
+    box_h = int(title_h + (detail_h + 1 if has_detail else 0) + pad * 2)
     gap = radius + max(8, int(14 * ctx.height / 720))
     if anchor == "e":
         origin_x, origin_y = sx + gap, sy - box_h / 2
@@ -269,12 +487,13 @@ def _place_marker_label(draw, ctx, sx, sy, radius, anchor, title, detail, title_
         fill=fill,
     )
     draw.text((origin_x + pad, origin_y + pad), title, font=title_font, fill=(*PAPER, alpha))
-    draw.text(
-        (origin_x + pad, origin_y + pad + title_h),
-        detail,
-        font=detail_font,
-        fill=(*MUTED, alpha),
-    )
+    if has_detail:
+        draw.text(
+            (origin_x + pad, origin_y + pad + title_h),
+            detail,
+            font=detail_font,
+            fill=(*MUTED, alpha),
+        )
 
 
 def _draw_cards(frame: Image.Image, ctx: FrameContext, scene: Scene, t: float) -> None:
@@ -344,15 +563,11 @@ def _draw_ui(frame: Image.Image, ctx: FrameContext, scene: Scene) -> None:
     date_w = draw.textlength(date, font=date_font)
     draw.text((ctx.width - pad - date_w, pad + 4), date, font=date_font, fill=GOLD)
     line2 = f"{scene.title}   ·   {ctx.doc.location_label}"
-    badge = ctx.badge or ""
-    badge_w = draw.textlength(badge, font=badge_font) if badge else 0
-    available = ctx.width - pad * 2 - badge_w - 20
+    available = ctx.width - pad * 2 - 20
     if draw.textlength(line2, font=meta_font) > available:
         line2 = scene.title
     line2_y = pad + _text_height(title_font) + 4
     draw.text((pad, line2_y), line2, font=meta_font, fill=MUTED)
-    if badge:
-        draw.text((ctx.width - pad - badge_w, line2_y + 2), badge, font=badge_font, fill=GOLD)
     _draw_legend(frame, ctx, pad, line2_y + _text_height(meta_font) + 12)
     _draw_caption(ImageDraw.Draw(frame), ctx, scene.narration, pad)
 

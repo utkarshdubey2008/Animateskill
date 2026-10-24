@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Archer</title>
+  <g fill="currentColor" stroke="#121614" stroke-width="2" paint-order="stroke fill">
+    <circle cx="24" cy="16" r="6"/>
+    <rect x="18" y="24" width="12" height="22" rx="2"/>
+    <path d="M40 12 C52 32 52 32 40 52" fill="none" stroke="currentColor" stroke-width="3"/>
+    <path d="M40 32 H54" fill="none" stroke="currentColor" stroke-width="3"/>
+    <polygon points="54,32 48,28 48,36"/>
+  </g>
+</svg>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <title>Chandragupta Maurya vs Seleucus Nicator, c. 305-303 BCE</title>
+  <desc>Original schematic drawn for this project. North is up. Movement is added by the scene file. Do not replace this plate with a scanned or traced published map.</desc>
+  <defs>
+    <radialGradient id="bg-radial" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#28313a"/>
+      <stop offset="100%" stop-color="#181f26"/>
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Landmass Base -->
+  <rect width="1600" height="900" fill="url(#bg-radial)"/>
+
+  <!-- Water Bodies -->
+  <!-- Arabian Sea / Indian Ocean -->
+  <path d="M 380 620 Q 520 610 620 630 Q 720 650 780 670 Q 820 720 860 900 L 0 900 L 0 670 Q 180 670 280 640 Q 340 625 380 620 Z" fill="#12181f"/>
+  <!-- Persian Gulf -->
+  <path d="M 80 540 Q 150 515 220 560 Q 280 610 310 650 Q 260 660 190 620 Q 110 580 80 540 Z" fill="#12181f"/>
+  <!-- Caspian Sea -->
+  <path d="M 260 160 Q 320 150 340 210 Q 350 280 340 330 Q 310 350 280 340 Q 250 310 250 240 Q 250 180 260 160 Z" fill="#12181f"/>
+  <!-- Aral Sea -->
+  <path d="M 460 80 Q 510 75 525 110 Q 520 145 490 150 Q 460 140 455 110 Q 455 90 460 80 Z" fill="#12181f"/>
+  <!-- Bay of Bengal Coastline -->
+  <path d="M 1320 620 Q 1380 680 1420 900 L 1600 900 L 1600 620 Q 1480 600 1320 620 Z" fill="#12181f"/>
+
+  <!-- Mountain Relief (Stylized Ridgelines) -->
+  <!-- Zagros Mountains -->
+  <path d="M 160 360 L 200 420 L 250 490 L 290 560" stroke="#384450" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
+  <!-- Hindu Kush Range -->
+  <path d="M 590 270 L 650 300 L 710 330 L 740 310" stroke="#404e5c" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.75"/>
+  <!-- Himalayas Range -->
+  <path d="M 780 290 L 920 320 L 1150 360 L 1400 390 L 1580 430" stroke="#404e5c" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.75"/>
+
+  <!-- Rivers -->
+  <!-- Euphrates & Tigris -->
+  <path d="M 60 380 Q 120 440 180 520" stroke="#35526c" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 90 350 Q 150 420 210 535" stroke="#35526c" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Oxus River -->
+  <path d="M 680 250 Q 590 210 530 150 Q 500 130 480 110" stroke="#35526c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Indus River and tributaries -->
+  <path d="M 820 280 Q 770 265 740 310 Q 720 360 710 430 Q 695 510 650 600 Q 630 635 625 650" stroke="#3b5d7d" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <!-- Jhelum & Chenab & Ravi -->
+  <path d="M 760 315 Q 735 370 715 425" stroke="#3b5d7d" stroke-width="2.5" fill="none" opacity="0.85"/>
+  <path d="M 790 330 Q 755 390 720 440" stroke="#3b5d7d" stroke-width="2.5" fill="none" opacity="0.85"/>
+  <path d="M 825 345 Q 780 410 730 460" stroke="#3b5d7d" stroke-width="2.5" fill="none" opacity="0.85"/>
+  <!-- Ganges & Yamuna -->
+  <path d="M 910 330 Q 1000 385 1120 430 Q 1230 465 1320 485 Q 1380 540 1400 620" stroke="#3b5d7d" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 930 350 Q 1020 410 1120 430" stroke="#3b5d7d" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- TERRITORIES -->
+  <!-- 1. Seleucid Core Western Territories -->
+  <path id="region-seleucid-core" d="M 0 100 L 420 100 Q 400 240 430 320 L 520 300 L 580 340 L 520 480 L 420 490 L 320 620 L 0 620 Z" fill="#2980b9" fill-opacity="0.55" stroke="#3498db" stroke-width="2" stroke-dasharray="6,3"/>
+
+  <!-- 2. Frontier Satrapies (Pre-Settlement Seleucid Blue, Post-Settlement Ceded to Mauryan Red) -->
+  <!-- Paropamisadae (Kabul Valley / South of Hindu Kush) -->
+  <path id="region-paropamisadae" d="M 580 270 Q 660 290 720 320 L 710 370 L 610 370 L 570 320 Z" fill="#2980b9" fill-opacity="0.6" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Arachosia (Kandahar Basin) -->
+  <path id="region-arachosia" d="M 570 370 L 700 370 L 680 470 L 540 470 L 530 410 Z" fill="#2980b9" fill-opacity="0.6" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Gedrosia (Baluchistan Desert & Coast) -->
+  <path id="region-gedrosia" d="M 420 490 L 670 490 L 640 620 Q 520 610 400 620 L 380 540 Z" fill="#2980b9" fill-opacity="0.6" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- 3. Campaign & Confrontation Zone (The Disputed Indus Frontier) -->
+  <path id="region-campaign-zone" d="M 650 320 Q 740 330 760 380 Q 740 460 670 470 Q 640 400 650 320 Z" fill="#d4af37" fill-opacity="0.22" stroke="#f39c12" stroke-width="2.5" stroke-dasharray="7,4"/>
+
+  <!-- 4. Mauryan Empire Core (Northern India, Gangetic Basin, Central India) -->
+  <path id="region-maurya-core" d="M 720 320 L 780 320 Q 940 360 1200 400 L 1420 440 L 1400 620 L 1260 620 L 1080 660 L 880 660 Q 780 600 710 470 L 715 370 Z" fill="#c0392b" fill-opacity="0.55" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3"/>
+
+  <!-- Labels on Cartographic Plate -->
+  <!-- Region Labels (Halos for Readability) -->
+  <g font-family="Liberation Sans, DejaVu Sans, sans-serif" font-weight="bold" font-size="16" fill="#f4efe4" opacity="0.85" text-anchor="middle">
+    <!-- Hindu Kush -->
+    <text x="660" y="290" stroke="#121614" stroke-width="4" paint-order="stroke fill">HINDU KUSH</text>
+    <!-- Indus River -->
+    <text x="670" y="540" stroke="#121614" stroke-width="4" paint-order="stroke fill">INDUS RIVER</text>
+    <!-- Ganges River -->
+    <text x="1140" y="420" stroke="#121614" stroke-width="4" paint-order="stroke fill">GANGES</text>
+    <!-- Paropamisadae -->
+    <text x="650" y="350" font-size="14" stroke="#121614" stroke-width="3" paint-order="stroke fill">PAROPAMISADAE</text>
+    <!-- Arachosia -->
+    <text x="610" y="430" font-size="14" stroke="#121614" stroke-width="3" paint-order="stroke fill">ARACHOSIA</text>
+    <!-- Gedrosia -->
+    <text x="530" y="560" font-size="14" stroke="#121614" stroke-width="3" paint-order="stroke fill">GEDROSIA</text>
+    <!-- Seleucid Realm -->
+    <text x="260" y="380" font-size="20" fill="#a8d4f0" stroke="#121614" stroke-width="4" paint-order="stroke fill">SELEUCID REALM</text>
+    <!-- Mauryan Empire -->
+    <text x="1020" y="500" font-size="22" fill="#f5a399" stroke="#121614" stroke-width="4" paint-order="stroke fill">MAURYAN EMPIRE</text>
+  </g>
+
+  <!-- Circular Ruler in Top Right Clear Corner (1400, 40) -->
+  <g transform="translate(1420, 40) scale(0.65)">
+    <g fill="none" stroke="#e6dcc8" stroke-width="2">
+      <circle cx="100" cy="100" r="78"/>
+      <circle cx="100" cy="100" r="62"/>
+      <path d="M100 22 V40 M100 160 V178 M22 100 H40 M160 100 H178" stroke-width="3"/>
+      <path d="M45 45 L58 58 M155 45 L142 58 M45 155 L58 142 M155 155 L142 142" opacity="0.7"/>
+    </g>
+    <g fill="#e6dcc8" font-family="Liberation Sans, DejaVu Sans, sans-serif" font-size="16" text-anchor="middle">
+      <text x="100" y="18">N</text>
+      <text x="188" y="105">E</text>
+      <text x="100" y="194">S</text>
+      <text x="14" y="105">W</text>
+    </g>
+    <polygon points="100,48 106,72 100,66 94,72" fill="#e6dcc8"/>
+  </g>
+</svg>

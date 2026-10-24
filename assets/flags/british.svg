@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="32" viewBox="0 0 60 40">
+  <rect width="60" height="40" fill="#00247d" stroke="#11161d" stroke-width="1.5"/>
+  <!-- St Andrew's Saltire (White) -->
+  <line x1="0" y1="0" x2="60" y2="40" stroke="#ffffff" stroke-width="8"/>
+  <line x1="60" y1="0" x2="0" y2="40" stroke="#ffffff" stroke-width="8"/>
+  <!-- St George's Cross Fimbriation (White) -->
+  <rect x="24" y="0" width="12" height="40" fill="#ffffff"/>
+  <rect x="0" y="14" width="60" height="12" fill="#ffffff"/>
+  <!-- St George's Cross (Red) -->
+  <rect x="26" y="0" width="8" height="40" fill="#cf142b"/>
+  <rect x="0" y="16" width="60" height="8" fill="#cf142b"/>
+  <rect width="60" height="40" fill="none" stroke="#e0d8c8" stroke-width="1"/>
+</svg>

@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "id": "chandragupta-seleucus",
+  "title": "Chandragupta Maurya vs Seleucus Nicator",
+  "date_label": "c. 305–303 BCE",
+  "location_label": "Northwestern Frontier & Indus Valley",
+  "fps": 24,
+  "width": 1280,
+  "height": 720,
+  "duration_s": 60,
+  "disclaimer": "Schematic, not a survey. Boundaries and troop locations are approximate estimates.",
+  "legend": [
+    {"swatch": "solid", "text": "Attested landmark / area"},
+    {"swatch": "hollow", "text": "Approximate force / boundary"},
+    {"swatch": "dashed", "text": "Illustrative movement"}
+  ],
+  "palette": {
+    "maurya": "#c0392b",
+    "seleucid": "#2980b9",
+    "neutral": "#d9d3a4",
+    "disputed": "#d4af37"
+  },
+  "map": {
+    "svg": "assets/maps/chandragupta-seleucus.svg",
+    "attribution": "Original schematic drawn for this project. North is up. The Indus, Ganges, and mountain passes are diagrammatic. Boundaries reflect territorial settlements described in Appian and Strabo. Do not replace this plate with a scanned or traced published map."
+  },
+  "narration": {
+    "voice": "rms",
+    "audio_file": null
+  },
+  "markers": {
+    "chandragupta": {
+      "role": "person",
+      "image": "assets/portraits/chandragupta_circle.png",
+      "label": "Chandragupta Maurya",
+      "detail": "sculpture",
+      "side": "maurya",
+      "confidence": "attested_area",
+      "x": 0.53,
+      "y": 0.38,
+      "anchor": "n",
+      "attach": "maurya_host",
+      "offset": [0.035, -0.035]
+    },
+    "seleucus": {
+      "role": "person",
+      "image": "assets/portraits/seleucus_circle.png",
+      "label": "Seleucus I Nicator",
+      "detail": "bronze bust",
+      "side": "seleucid",
+      "confidence": "attested_area",
+      "x": 0.41,
+      "y": 0.38,
+      "anchor": "n",
+      "attach": "seleucid_host",
+      "offset": [-0.035, -0.035]
+    },
+    "maurya_host": {
+      "role": "army",
+      "label": "Mauryan Army",
+      "detail": "four-fold host",
+      "side": "maurya",
+      "confidence": "approximate",
+      "symbol": ["elephant", "chariot", "cavalry", "infantry"],
+      "x": 0.53,
+      "y": 0.41,
+      "anchor": "s"
+    },
+    "seleucid_host": {
+      "role": "army",
+      "label": "Seleucid Army",
+      "detail": "Macedonian phalanx",
+      "side": "seleucid",
+      "confidence": "approximate",
+      "symbol": ["infantry", "cavalry", "archer"],
+      "x": 0.41,
+      "y": 0.41,
+      "anchor": "s"
+    },
+    "pataliputra": {
+      "label": "Pataliputra",
+      "detail": "Mauryan capital",
+      "side": "maurya",
+      "confidence": "attested_area",
+      "x": 0.80,
+      "y": 0.47,
+      "anchor": "n"
+    },
+    "taxila": {
+      "label": "Taxila",
+      "detail": "Gandhara center",
+      "side": "maurya",
+      "confidence": "attested_area",
+      "x": 0.51,
+      "y": 0.35,
+      "anchor": "e"
+    },
+    "hindu_kush": {
+      "label": "Hindu Kush",
+      "detail": "mountain barrier",
+      "side": "neutral",
+      "confidence": "approximate",
+      "x": 0.44,
+      "y": 0.30,
+      "anchor": "n"
+    },
+    "indus_river": {
+      "label": "Indus River",
+      "detail": "frontier water",
+      "side": "neutral",
+      "confidence": "attested_area",
+      "x": 0.48,
+      "y": 0.44,
+      "anchor": "e"
+    },
+    "babylon": {
+      "label": "Babylon",
+      "detail": "Seleucid seat",
+      "side": "seleucid",
+      "confidence": "attested_area",
+      "x": 0.08,
+      "y": 0.50,
+      "anchor": "s"
+    },
+    "arachosia": {
+      "label": "Arachosia",
+      "detail": "Kandahar basin",
+      "side": "disputed",
+      "confidence": "approximate",
+      "x": 0.39,
+      "y": 0.45,
+      "anchor": "w"
+    },
+    "gedrosia": {
+      "label": "Gedrosia",
+      "detail": "coastal satrapy",
+      "side": "disputed",
+      "confidence": "approximate",
+      "x": 0.39,
+      "y": 0.56,
+      "anchor": "w"
+    },
+    "elephants_transfer": {
+      "label": "500 WAR ELEPHANTS",
+      "detail": "pact transfer",
+      "side": "disputed",
+      "confidence": "attested_area",
+      "x": 0.47,
+      "y": 0.46,
+      "anchor": "s"
+    }
+  },
+  "scenes": [
+    {
+      "id": "collision",
+      "title": "Two Empires on a Collision Course",
+      "start_s": 0,
+      "end_s": 8,
+      "narration": "By 305 BCE, two powerful empires stood on a collision course. Chandragupta Maurya ruled much of northern India, while Seleucus Nicator sought to extend his power eastward into the lands once conquered by Alexander the Great.",
+      "speech": "By 305 BCE, two powerful empires stood on a collision course. Chandragupta Maurya ruled much of northern India, while Seleucus Nicator sought to extend his power eastward into the lands once conquered by Alexander the Great.",
+      "transition_in": "fade",
+      "transition_s": 0.6,
+      "camera": {
+        "start": {"cx": 0.50, "cy": 0.48, "zoom": 1.0},
+        "end": {"cx": 0.50, "cy": 0.48, "zoom": 0.95}
+      },
+      "show": ["hindu_kush", "indus_river", "chandragupta", "seleucus", "maurya_host", "seleucid_host"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "overlays": []
+    },
+    {
+      "id": "maurya-realm",
+      "title": "The Mauryan Realm",
+      "start_s": 8,
+      "end_s": 17,
+      "narration": "Chandragupta had built one of the largest empires in Indian history. His growing power extended toward the northwestern frontier, where the interests of the Mauryans and Seleucids now overlapped.",
+      "speech": "Chandragupta had built one of the largest empires in Indian history. His growing power extended toward the northwestern frontier, where the interests of the Mauryans and Seleucids now overlapped.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.50, "cy": 0.48, "zoom": 0.95},
+        "end": {"cx": 0.62, "cy": 0.44, "zoom": 0.72}
+      },
+      "show": ["pataliputra", "taxila", "hindu_kush", "indus_river", "chandragupta", "maurya_host"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "overlays": []
+    },
+    {
+      "id": "seleucid-realm",
+      "title": "The Seleucid Advance",
+      "start_s": 17,
+      "end_s": 27,
+      "narration": "Seleucus, one of Alexander's successors, moved east around 305 BCE. His campaign brought him into conflict with Chandragupta, whose empire had become a formidable power in the region.",
+      "speech": "Seleucus, one of Alexander's successors, moved east around 305 BCE. His campaign brought him into conflict with Chandragupta, whose empire had become a formidable power in the region.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.62, "cy": 0.44, "zoom": 0.72},
+        "end": {"cx": 0.38, "cy": 0.44, "zoom": 0.68}
+      },
+      "show": ["babylon", "arachosia", "gedrosia", "hindu_kush", "indus_river", "seleucus", "seleucid_host"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "overlays": []
+    },
+    {
+      "id": "frontier-conflict",
+      "title": "The Northwestern Frontier",
+      "start_s": 27,
+      "end_s": 38,
+      "narration": "The surviving historical accounts provide few details of the fighting. The exact routes, army sizes, casualties, and individual engagements remain uncertain. What is clear is that the confrontation challenged Seleucus's ambitions in the east.",
+      "speech": "The surviving historical accounts provide few details of the fighting. The exact routes, army sizes, casualties, and individual engagements remain uncertain. What is clear is that the confrontation challenged Seleucus's ambitions in the east.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.38, "cy": 0.44, "zoom": 0.68},
+        "end": {"cx": 0.47, "cy": 0.40, "zoom": 0.46}
+      },
+      "show": ["hindu_kush", "indus_river", "taxila", "seleucus", "chandragupta", "seleucid_host", "maurya_host"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "overlays": [],
+      "motions": {
+        "seleucid_host": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.12, "x": 0.40, "y": 0.41},
+            {"t": 0.82, "x": 0.44, "y": 0.41}
+          ]
+        },
+        "maurya_host": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.12, "x": 0.54, "y": 0.41},
+            {"t": 0.82, "x": 0.50, "y": 0.41}
+          ]
+        }
+      }
+    },
+    {
+      "id": "settlement",
+      "title": "Territorial Settlement and War Elephants",
+      "start_s": 38,
+      "end_s": 49,
+      "narration": "By approximately 303 BCE, the conflict had ended in a settlement. Seleucus ceded territories to Chandragupta and received five hundred war elephants. Their confrontation gave way to a diplomatic relationship.",
+      "speech": "By approximately 303 BCE, the conflict had ended in a settlement. Seleucus ceded territories to Chandragupta and received five hundred war elephants. Their confrontation gave way to a diplomatic relationship.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.47, "cy": 0.40, "zoom": 0.46},
+        "end": {"cx": 0.47, "cy": 0.43, "zoom": 0.56}
+      },
+      "show": ["hindu_kush", "indus_river", "arachosia", "gedrosia", "seleucus", "chandragupta", "seleucid_host", "maurya_host", "elephants_transfer"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "layers": [
+        {"id": "region-paropamisadae", "t": 0.05, "fill": "#c0392b"},
+        {"id": "region-arachosia", "t": 0.05, "fill": "#c0392b"},
+        {"id": "region-gedrosia", "t": 0.05, "fill": "#c0392b"}
+      ],
+      "motions": {
+        "seleucid_host": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.44, "y": 0.41},
+            {"t": 1.0, "x": 0.44, "y": 0.41}
+          ]
+        },
+        "maurya_host": {
+          "confidence": "illustrative",
+          "keys": [
+            {"t": 0.0, "x": 0.50, "y": 0.41},
+            {"t": 1.0, "x": 0.50, "y": 0.41}
+          ]
+        }
+      },
+      "overlays": [
+        {
+          "type": "card",
+          "t0": 0.12,
+          "t1": 0.95,
+          "accent": 0,
+          "lines": [
+            "500 WAR ELEPHANTS",
+            "Treaty of the Indus, c. 303 BCE",
+            "Arachosia, Gedrosia, Paropamisadae ceded",
+            "Epigamia (marriage alliance) and peace ratified"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balance-of-power",
+      "title": "New Balance of Power",
+      "start_s": 49,
+      "end_s": 60,
+      "narration": "Chandragupta strengthened his empire's position in the northwest, while Seleucus gained a powerful new resource for his western campaigns. The conflict reshaped the balance of power between two great states of the ancient world.",
+      "speech": "Chandragupta strengthened his empire's position in the northwest, while Seleucus gained a powerful new resource for his western campaigns. The conflict reshaped the balance of power between two great states of the ancient world.",
+      "transition_in": "dissolve",
+      "transition_s": 0.5,
+      "camera": {
+        "start": {"cx": 0.47, "cy": 0.43, "zoom": 0.56},
+        "end": {"cx": 0.50, "cy": 0.48, "zoom": 0.92}
+      },
+      "show": ["pataliputra", "babylon", "hindu_kush", "indus_river", "chandragupta", "seleucus"],
+      "overrides": {},
+      "arrows": [],
+      "effects": [],
+      "layers": [
+        {"id": "region-paropamisadae", "t": 0.0, "fill": "#c0392b"},
+        {"id": "region-arachosia", "t": 0.0, "fill": "#c0392b"},
+        {"id": "region-gedrosia", "t": 0.0, "fill": "#c0392b"}
+      ],
+      "overlays": [
+        {
+          "type": "card",
+          "t0": 0.15,
+          "t1": 0.98,
+          "accent": 0,
+          "lines": [
+            "CHANDRAGUPTA MAURYA vs SELEUCUS NICATOR",
+            "c. 305–303 BCE",
+            "Mauryan northwestern dominion secured",
+            "Elephants deployed at Ipsus (301 BCE)"
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "treaty-sources",
+      "text": "Appian (Syriaca 55) and Strabo (Geographica 15.2.9) record that Seleucus crossed the Indus and concluded a treaty with Sandrocottus (Chandragupta), ceding Arachosia, Gedrosia, Paropamisadae, and parts of Aria in exchange for 500 war elephants and a marriage alliance (epigamia).",
+      "refs": [
+        "Appian, Roman History, The Syrian Wars 55",
+        "Strabo, Geographica, Book XV, Chapter 2, Section 9",
+        "Pliny, Natural History, Book VI, Chapter 21"
+      ]
+    },
+    {
+      "id": "campaign-uncertainty",
+      "text": "No contemporary tactical narrative of the clash survives. Ancient historians omit battle details, troop movements, and casualties, recording only the confrontation at the Indus and the resulting treaty.",
+      "refs": [
+        "Vincent A. Smith, The Early History of India (1904)",
+        "Peter Green, Alexander to Actium: The Historical Evolution of the Hellenistic Age (1990)"
+      ]
+    },
+    {
+      "id": "elephant-deployment",
+      "text": "Plutarch (Life of Demetrius 28-29) notes that Seleucus brought the 500 war elephants obtained from Chandragupta into the Battle of Ipsus in 301 BCE, where they played a decisive role in defeating Antigonus Monophthalmus.",
+      "refs": [
+        "Plutarch, Parallel Lives, Life of Demetrius 28-29",
+        "R.C. Majumdar, The History and Culture of the Indian People, Vol. II: The Age of Imperial Unity"
+      ]
+    }
+  ]
+}

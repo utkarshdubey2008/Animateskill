@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <title>Siege of Seringapatam, 1799</title>
+  <desc>Original schematic drawn for this project. North is up. Uncolored tactical plan with distinct blue river channels. Movement is added by the scene file. Do not replace this plate with a scanned or traced published map.</desc>
+  <defs>
+    <radialGradient id="slate-bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#222830"/>
+      <stop offset="100%" stop-color="#181d24"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Dark Slate Monochromatic Background -->
+  <rect width="1600" height="900" fill="url(#slate-bg)"/>
+
+  <!-- Topographic Elevation / Contours (Subtle neutral line work) -->
+  <path d="M 100 200 Q 240 180 320 280 Q 280 400 180 460" stroke="#2a323c" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
+  <path d="M 120 700 Q 260 680 340 600 Q 280 500 180 520" stroke="#2a323c" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
+
+  <!-- Cauvery River Channels in Prominent Proper Blue Water Color -->
+  <!-- Main River Inflow from West -->
+  <path d="M 0 450 Q 180 445 340 450" stroke="#12304d" stroke-width="68" fill="none" stroke-linecap="square"/>
+  <path d="M 0 450 Q 180 445 340 450" stroke="#25689e" stroke-width="58" fill="none" stroke-linecap="square"/>
+  <path d="M 0 450 Q 180 445 340 450" stroke="#4899d9" stroke-width="20" fill="none" stroke-linecap="square" opacity="0.45"/>
+
+  <!-- North Branch of Cauvery -->
+  <path d="M 340 450 Q 420 300 600 240 Q 900 210 1200 260 Q 1400 320 1600 440" stroke="#12304d" stroke-width="58" fill="none" stroke-linecap="round"/>
+  <path d="M 340 450 Q 420 300 600 240 Q 900 210 1200 260 Q 1400 320 1600 440" stroke="#25689e" stroke-width="48" fill="none" stroke-linecap="round"/>
+  <path d="M 340 450 Q 420 300 600 240 Q 900 210 1200 260 Q 1400 320 1600 440" stroke="#4899d9" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- South Branch of Cauvery -->
+  <path d="M 340 450 Q 420 600 620 660 Q 920 690 1220 640 Q 1420 580 1600 460" stroke="#12304d" stroke-width="58" fill="none" stroke-linecap="round"/>
+  <path d="M 340 450 Q 420 600 620 660 Q 920 690 1220 640 Q 1420 580 1600 460" stroke="#25689e" stroke-width="48" fill="none" stroke-linecap="round"/>
+  <path d="M 340 450 Q 420 600 620 660 Q 920 690 1220 640 Q 1420 580 1600 460" stroke="#4899d9" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- Seringapatam Island Interior Landmass -->
+  <path d="M 400 450 Q 460 310 620 270 Q 920 240 1200 290 Q 1380 350 1480 450 Q 1380 550 1200 610 Q 920 660 620 630 Q 460 590 400 450 Z" fill="#272f38" stroke="#333d48" stroke-width="2"/>
+
+  <!-- Seringapatam Fortress Walls (Western Half of Island) -->
+  <polygon points="480,350 780,330 840,430 820,570 540,570 470,470 470,390" fill="#1e242b" stroke="#5a6977" stroke-width="4"/>
+  <!-- Bastions (Projecting Angles) -->
+  <circle cx="480" cy="350" r="16" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="470" cy="390" r="14" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="470" cy="470" r="14" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="540" cy="570" r="16" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="820" cy="570" r="16" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="840" cy="430" r="16" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+  <circle cx="780" cy="330" r="16" fill="#1e242b" stroke="#5a6977" stroke-width="3"/>
+
+  <!-- Inner Ditch and Rampart Line -->
+  <polyline points="510,370 760,355 805,430 790,545 560,545 500,470 500,400 510,370" fill="none" stroke="#3f4b57" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- The Western Breach (Curtain Wall Breached by Artillery) -->
+  <path d="M 466 415 L 474 445" stroke="#d4af37" stroke-width="8" stroke-linecap="square"/>
+
+  <!-- The Water Gate (Holey Gateway) on Northern Rampart -->
+  <rect x="635" y="320" width="24" height="14" fill="#161a1f" stroke="#d4af37" stroke-width="2"/>
+
+  <!-- Lal Mahal Palace Compound -->
+  <rect x="660" y="410" width="60" height="50" fill="none" stroke="#4f5c69" stroke-width="2"/>
+
+  <!-- British Breaching Batteries & Siege Trenches (Western Bank) -->
+  <path d="M 240 380 Q 280 430 250 510" stroke="#8a9ba8" stroke-width="3" fill="none" stroke-dasharray="6,3"/>
+  <rect x="270" y="390" width="22" height="12" fill="#181e24" stroke="#8a9ba8" stroke-width="2"/>
+  <rect x="280" y="435" width="22" height="12" fill="#181e24" stroke="#8a9ba8" stroke-width="2"/>
+  <rect x="260" y="480" width="22" height="12" fill="#181e24" stroke="#8a9ba8" stroke-width="2"/>
+
+  <!-- Cartographic Labels (Neutral Halos) -->
+  <g font-family="Liberation Sans, DejaVu Sans, sans-serif" font-size="14" font-weight="bold" fill="#e0e6ed" opacity="0.9" text-anchor="middle">
+    <text x="800" y="195" fill="#a4cde8" stroke="#12181f" stroke-width="3.5" paint-order="stroke fill">CAUVERY RIVER (NORTH BRANCH)</text>
+    <text x="800" y="730" fill="#a4cde8" stroke="#12181f" stroke-width="3.5" paint-order="stroke fill">CAUVERY RIVER (SOUTH BRANCH)</text>
+    <text x="640" y="500" font-size="16" stroke="#181d24" stroke-width="4" paint-order="stroke fill">SERINGAPATAM FORTRESS</text>
+    <text x="647" y="310" font-size="12" fill="#d4af37" stroke="#181d24" stroke-width="3" paint-order="stroke fill">WATER GATE</text>
+    <text x="410" y="435" font-size="12" fill="#d4af37" stroke="#181d24" stroke-width="3" paint-order="stroke fill">THE BREACH</text>
+    <text x="210" y="450" font-size="13" stroke="#181d24" stroke-width="3" paint-order="stroke fill">BRITISH SIEGE LINES</text>
+  </g>
+
+  <!-- Circular Ruler in Top Right (1420, 40) -->
+  <g transform="translate(1420, 40) scale(0.65)">
+    <g fill="none" stroke="#c8d0d8" stroke-width="2">
+      <circle cx="100" cy="100" r="78"/>
+      <circle cx="100" cy="100" r="62"/>
+      <path d="M100 22 V40 M100 160 V178 M22 100 H40 M160 100 H178" stroke-width="3"/>
+      <path d="M45 45 L58 58 M155 45 L142 58 M45 155 L58 142 M155 155 L142 142" opacity="0.7"/>
+    </g>
+    <g fill="#c8d0d8" font-family="Liberation Sans, DejaVu Sans, sans-serif" font-size="16" text-anchor="middle">
+      <text x="100" y="18">N</text>
+      <text x="188" y="105">E</text>
+      <text x="100" y="194">S</text>
+      <text x="14" y="105">W</text>
+    </g>
+    <polygon points="100,48 106,72 100,66 94,72" fill="#c8d0d8"/>
+  </g>
+</svg>

@@ -9,7 +9,7 @@ description: >
 
 ## Overview
 
-The user's script is the soundtrack. It is burned into the frame. The file has no speech, music, or effects.
+Subtitles are strictly mandatory on every scene. The user's script is the soundtrack and narrative: it is burned directly into the lower 20% of the video frame. The video has no audio speech, music, or sound effects (silent AAC track muxed). Do not draw placeholder badges such as "CAPTIONS ONLY" on screen.
 
 ## When to use
 
